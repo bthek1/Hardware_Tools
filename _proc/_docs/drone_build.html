@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Drone Build">
 
-<title>Hardware_Tools</title>
+<title>Drone Build – Hardware_Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,11 +70,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Hardware_Tools">
-<meta property="og:description" content="">
+<meta property="og:title" content="Drone Build – Hardware_Tools">
+<meta property="og:description" content="Drone Build">
 <meta property="og:site_name" content="Hardware_Tools">
-<meta name="twitter:title" content="Hardware_Tools">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="Drone Build – Hardware_Tools">
+<meta name="twitter:description" content="Drone Build">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -132,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Hardware_Tools</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./drone_build.html">Drone Build</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -146,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hardware_Tools</span></a>
   </div>
 </li>
@@ -170,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./drone_build.html" class="sidebar-item-text sidebar-link">
+  <a href="./drone_build.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Drone Build</span></a>
   </div>
 </li>
@@ -208,27 +175,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#developer-guide" id="toc-developer-guide" class="nav-link active" data-scroll-target="#developer-guide">Developer Guide</a>
+  <li><a href="#quadcopter-frame" id="toc-quadcopter-frame" class="nav-link active" data-scroll-target="#quadcopter-frame"><strong>1. Quadcopter Frame</strong></a></li>
+  <li><a href="#motors" id="toc-motors" class="nav-link" data-scroll-target="#motors"><strong>2. Motors</strong></a></li>
+  <li><a href="#electronic-speed-controllers-esc" id="toc-electronic-speed-controllers-esc" class="nav-link" data-scroll-target="#electronic-speed-controllers-esc"><strong>3. Electronic Speed Controllers (ESC)</strong></a></li>
+  <li><a href="#flight-controller-fc" id="toc-flight-controller-fc" class="nav-link" data-scroll-target="#flight-controller-fc"><strong>4. Flight Controller (FC)</strong></a></li>
+  <li><a href="#propellers" id="toc-propellers" class="nav-link" data-scroll-target="#propellers"><strong>5. Propellers</strong></a></li>
+  <li><a href="#battery-lipo" id="toc-battery-lipo" class="nav-link" data-scroll-target="#battery-lipo"><strong>6. Battery (LiPo)</strong></a></li>
+  <li><a href="#radio-transmitter-receiver" id="toc-radio-transmitter-receiver" class="nav-link" data-scroll-target="#radio-transmitter-receiver"><strong>7. Radio Transmitter &amp; Receiver</strong></a></li>
+  <li><a href="#fpv-camera-video-transmitter-vtx" id="toc-fpv-camera-video-transmitter-vtx" class="nav-link" data-scroll-target="#fpv-camera-video-transmitter-vtx"><strong>8. FPV Camera &amp; Video Transmitter (VTX)</strong></a></li>
+  <li><a href="#gps-module-optional" id="toc-gps-module-optional" class="nav-link" data-scroll-target="#gps-module-optional"><strong>9. GPS Module (optional)</strong></a></li>
+  <li><a href="#power-distribution-board-pdb" id="toc-power-distribution-board-pdb" class="nav-link" data-scroll-target="#power-distribution-board-pdb"><strong>10. Power Distribution Board (PDB)</strong></a></li>
+  <li><a href="#miscellaneous-parts" id="toc-miscellaneous-parts" class="nav-link" data-scroll-target="#miscellaneous-parts"><strong>11. Miscellaneous Parts</strong></a>
   <ul class="collapse">
-  <li><a href="#install-hardware_tools-in-development-mode" id="toc-install-hardware_tools-in-development-mode" class="nav-link" data-scroll-target="#install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</a></li>
+  <li><a href="#recommended-parts-table" id="toc-recommended-parts-table" class="nav-link" data-scroll-target="#recommended-parts-table"><strong>Recommended Parts Table</strong></a></li>
   </ul></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a>
-  <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
-  </ul></li>
-  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="drone_build.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="drone_build.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="drone_build.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hardware_Tools</h1>
+<h1 class="title">Drone Build</h1>
 </div>
 
+<div>
+  <div class="description">
+    Drone Build
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -244,49 +220,195 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<p>This file will become your README and also the index of your documentation.</p>
-<section id="developer-guide" class="level2">
-<h2 class="anchored" data-anchor-id="developer-guide">Developer Guide</h2>
-<p>If you are new to using <code>nbdev</code> here are some useful pointers to get you started.</p>
-<section id="install-hardware_tools-in-development-mode" class="level3">
-<h3 class="anchored" data-anchor-id="install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure Hardware_Tools package is installed in development mode</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install <span class="at">-e</span> .</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make changes under nbs/ directory</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># compile to have changes apply to Hardware_Tools</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nbdev_prepare</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="quadcopter-frame" class="level2">
+<h2 class="anchored" data-anchor-id="quadcopter-frame"><strong>1. Quadcopter Frame</strong></h2>
+<ul>
+<li><strong>Frame Size</strong>: Choose based on your requirements (racing, freestyle, camera drone). Common sizes are 150mm (micro), 250mm (freestyle/racing), 450mm (camera/freestyle).</li>
+<li><strong>Material</strong>: Carbon fiber is lightweight and durable. Avoid plastic unless for toy drones.</li>
+<li><strong>Mounting</strong>: Ensure the frame supports the components you’re planning to use (motor mounting pattern, flight controller size, etc.).</li>
+</ul>
 </section>
+<section id="motors" class="level2">
+<h2 class="anchored" data-anchor-id="motors"><strong>2. Motors</strong></h2>
+<ul>
+<li><strong>Motor Size</strong>: Defined by numbers (e.g., 2205). First two digits refer to the stator diameter; the second two are stator height.</li>
+<li><strong>KV Rating</strong>: Determines motor speed. Higher KV = faster motor, but less torque. Choose based on propeller size and battery.</li>
+<li><strong>Type</strong>: Brushless motors are most common due to efficiency and durability.</li>
+</ul>
 </section>
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<section id="installation" class="level3">
-<h3 class="anchored" data-anchor-id="installation">Installation</h3>
-<p>Install latest from the GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install git+https://github.com/bthek1/Hardware_Tools.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda install <span class="at">-c</span> bthek1 Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://pypi.org/project/Hardware_Tools/">pypi</a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="electronic-speed-controllers-esc" class="level2">
+<h2 class="anchored" data-anchor-id="electronic-speed-controllers-esc"><strong>3. Electronic Speed Controllers (ESC)</strong></h2>
+<ul>
+<li><strong>Amperage Rating</strong>: Choose ESCs that support the motor’s current draw (check motor datasheets). Add a 20-30% safety margin.</li>
+<li><strong>Number of ESCs</strong>: 4 individual ESCs or a 4-in-1 ESC board. 4-in-1 simplifies wiring but may be harder to replace individually.</li>
+<li><strong>Firmware</strong>: BLHeli_S or BLHeli_32 are common for advanced features and performance</li>
+</ul>
 </section>
-<section id="documentation" class="level3">
-<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
-<p>Documentation can be found hosted on this GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>’s <a href="https://bthek1.github.io/Hardware_Tools/">pages</a>. Additionally you can find package manager specific guidelines on <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a> and <a href="https://pypi.org/project/Hardware_Tools/">pypi</a> respectively.</p>
+<section id="flight-controller-fc" class="level2">
+<h2 class="anchored" data-anchor-id="flight-controller-fc"><strong>4. Flight Controller (FC)</strong></h2>
+<ul>
+<li><strong>Processor</strong>: F7 or F4 processors are common. F7 provides more future-proofing and features.</li>
+<li><strong>Gyros</strong>: Look for FCs with high-performance gyros for smoother flight. MPU6000 is reliable for most builds.</li>
+<li><strong>UART Ports</strong>: Ensure enough ports for your accessories like GPS, telemetry, and receiver.</li>
+<li><strong>Firmware</strong>: Betaflight or iNav for FPV racing/freestyle, or ArduPilot for more advanced features.</li>
+</ul>
 </section>
+<section id="propellers" class="level2">
+<h2 class="anchored" data-anchor-id="propellers"><strong>5. Propellers</strong></h2>
+<ul>
+<li><strong>Size</strong>: Propeller size should match the motor and frame size. Common sizes are 5-inch for freestyle and racing, 6-8 inch for medium, and larger for camera drones.</li>
+<li><strong>Pitch</strong>: A higher pitch increases speed but reduces flight time. Choose based on your flying style.</li>
+<li><strong>Material</strong>: Nylon with glass fiber is durable and affordable.</li>
+</ul>
 </section>
-<section id="how-to-use" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use">How to use</h2>
-<p>Fill me in please! Don’t forget code examples:</p>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre><code>2</code></pre>
-</div>
-</div>
+<section id="battery-lipo" class="level2">
+<h2 class="anchored" data-anchor-id="battery-lipo"><strong>6. Battery (LiPo)</strong></h2>
+<ul>
+<li><strong>Cell Count</strong>: Defined as 3S, 4S, etc. More cells mean higher voltage (3S = 11.1V, 4S = 14.8V).</li>
+<li><strong>Capacity (mAh)</strong>: Larger capacity gives longer flight time but increases weight. Balance capacity with weight for your drone size.</li>
+<li><strong>C Rating</strong>: Defines discharge rate. Higher C rating = more current output. Choose at least 30C-50C for racing drones.</li>
+</ul>
+</section>
+<section id="radio-transmitter-receiver" class="level2">
+<h2 class="anchored" data-anchor-id="radio-transmitter-receiver"><strong>7. Radio Transmitter &amp; Receiver</strong></h2>
+<ul>
+<li><strong>Channels</strong>: At least 6-8 channels are recommended for basic drone control.</li>
+<li><strong>Range</strong>: Choose a transmitter with sufficient range (consider 2.4GHz or long-range 915MHz systems for FPV).</li>
+<li><strong>Receiver Type</strong>: FrSky, FlySky, Spektrum, or Crossfire depending on your preferred brand and features.</li>
+</ul>
+</section>
+<section id="fpv-camera-video-transmitter-vtx" class="level2">
+<h2 class="anchored" data-anchor-id="fpv-camera-video-transmitter-vtx"><strong>8. FPV Camera &amp; Video Transmitter (VTX)</strong></h2>
+<ul>
+<li><strong>FPV Camera</strong>: Look for low-latency cameras with high-resolution (600TVL to 1200TVL) for a clear FPV feed.</li>
+<li><strong>Video Transmitter (VTX)</strong>: Choose based on the required range (25mW for short-range, 200-600mW for longer ranges).</li>
+<li><strong>VTX Band</strong>: Make sure your VTX operates on legal frequencies in your country (typically 5.8GHz).</li>
+</ul>
+</section>
+<section id="gps-module-optional" class="level2">
+<h2 class="anchored" data-anchor-id="gps-module-optional"><strong>9. GPS Module (optional)</strong></h2>
+<ul>
+<li><strong>Purpose</strong>: Adds features like Return-to-Home (RTH) and position hold. Essential for camera drones and advanced features.</li>
+<li><strong>Compatibility</strong>: Ensure it’s compatible with your flight controller firmware.</li>
+</ul>
+</section>
+<section id="power-distribution-board-pdb" class="level2">
+<h2 class="anchored" data-anchor-id="power-distribution-board-pdb"><strong>10. Power Distribution Board (PDB)</strong></h2>
+<ul>
+<li><strong>Current Rating</strong>: Ensure it supports the combined current draw of all your components.</li>
+<li><strong>Built-in Features</strong>: Some PDBs come with built-in voltage regulators or OSD (On-Screen Display) for telemetry.</li>
+</ul>
+</section>
+<section id="miscellaneous-parts" class="level2">
+<h2 class="anchored" data-anchor-id="miscellaneous-parts"><strong>11. Miscellaneous Parts</strong></h2>
+<ul>
+<li><strong>LEDs</strong>: For night flying or visibility.</li>
+<li><strong>Buzzer</strong>: Helps locate the drone in case of a crash.</li>
+<li><strong>XT60 Connectors</strong>: Common connectors for LiPo batteries.</li>
+</ul>
+<section id="recommended-parts-table" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-parts-table"><strong>Recommended Parts Table</strong></h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 29%">
+<col style="width: 40%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Component</strong></th>
+<th><strong>Recommendation</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Price Range</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Frame</strong></td>
+<td>TBS Source One 5-inch Frame</td>
+<td>5-inch freestyle frame, sturdy, affordable</td>
+<td>$30 - $50</td>
+</tr>
+<tr class="even">
+<td><strong>Motors</strong></td>
+<td>Emax Eco II 2207 1700KV</td>
+<td>Budget-friendly motors, great for 5-inch props on 6S batteries</td>
+<td>$50 - $70 (set)</td>
+</tr>
+<tr class="odd">
+<td><strong>ESC</strong></td>
+<td>Hobbywing Xrotor 45A 4-in-1 ESC</td>
+<td>High-quality, reliable 4-in-1 ESC</td>
+<td>$50 - $70</td>
+</tr>
+<tr class="even">
+<td><strong>Flight Controller</strong></td>
+<td>Mamba F405 MK2 Flight Controller</td>
+<td>Reliable FC with F405 processor, great for Betaflight builds</td>
+<td>$35 - $50</td>
+</tr>
+<tr class="odd">
+<td><strong>Propellers</strong></td>
+<td>HQ Prop 5x4.3x3 V1S</td>
+<td>5-inch prop with great durability and flight performance</td>
+<td>$3 - $6 (set)</td>
+</tr>
+<tr class="even">
+<td><strong>Battery</strong></td>
+<td>Tattu 1300mAh 4S 75C LiPo</td>
+<td>Popular LiPo battery for freestyle drones</td>
+<td>$25 - $40</td>
+</tr>
+<tr class="odd">
+<td><strong>Transmitter</strong></td>
+<td>FrSky Taranis QX7</td>
+<td>Reliable transmitter, supports OpenTX for custom setups</td>
+<td>$120 - $150</td>
+</tr>
+<tr class="even">
+<td><strong>Receiver</strong></td>
+<td>FrSky R-XSR Receiver</td>
+<td>Compact receiver with good range and telemetry</td>
+<td>$20 - $30</td>
+</tr>
+<tr class="odd">
+<td><strong>FPV Camera</strong></td>
+<td>Runcam Phoenix 2</td>
+<td>Low-latency camera with excellent image quality</td>
+<td>$30 - $40</td>
+</tr>
+<tr class="even">
+<td><strong>VTX</strong></td>
+<td>TBS Unify Pro 5G8 HV</td>
+<td>Trusted, powerful VTX with multiple power output options</td>
+<td>$40 - $60</td>
+</tr>
+<tr class="odd">
+<td><strong>GPS Module</strong></td>
+<td>Beitian BN-220 GPS</td>
+<td>Compact and reliable GPS module</td>
+<td>$15 - $25</td>
+</tr>
+<tr class="even">
+<td><strong>Power Distribution Board</strong></td>
+<td>Matek PDB XT60</td>
+<td>PDB with built-in 5V/12V BEC for powering peripherals</td>
+<td>$10 - $15</td>
+</tr>
+<tr class="odd">
+<td><strong>Buzzer</strong></td>
+<td>ViFly Finder 2</td>
+<td>Self-powered buzzer with locator function</td>
+<td>$15 - $20</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>This guide gives an overview of the essential components needed to build a quadcopter, along with recommendations that balance performance and budget.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

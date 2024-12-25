@@ -1,0 +1,12 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 01_Electrical_Tools.ipynb
+      - 02_Computer_Build.ipynb
+      - 03_RGB_Lighting_Build.ipynb
+      - 05_Drone_Build.ipynb
+      - 06_Home_Assistant.ipynb
+      - 07_Raspberry_Pi_5.ipynb
+      - 08_Pico.ipynb
+      - p_05_Spec.ipynb

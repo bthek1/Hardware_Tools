@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Spec">
 
-<title>Hardware_Tools</title>
+<title>Spec – Hardware_Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,11 +70,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Hardware_Tools">
-<meta property="og:description" content="">
+<meta property="og:title" content="Spec – Hardware_Tools">
+<meta property="og:description" content="Spec">
 <meta property="og:site_name" content="Hardware_Tools">
-<meta name="twitter:title" content="Hardware_Tools">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="Spec – Hardware_Tools">
+<meta name="twitter:description" content="Spec">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -132,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Hardware_Tools</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_05_spec.html">Spec</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -146,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hardware_Tools</span></a>
   </div>
 </li>
@@ -194,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./p_05_spec.html" class="sidebar-item-text sidebar-link">
+  <a href="./p_05_spec.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Spec</span></a>
   </div>
 </li>
@@ -208,27 +175,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#developer-guide" id="toc-developer-guide" class="nav-link active" data-scroll-target="#developer-guide">Developer Guide</a>
+  <li><a href="#laptop---specs" id="toc-laptop---specs" class="nav-link active" data-scroll-target="#laptop---specs">Laptop - Specs</a></li>
+  <li><a href="#monitors---specs" id="toc-monitors---specs" class="nav-link" data-scroll-target="#monitors---specs">Monitors - Specs</a></li>
+  <li><a href="#cable-management" id="toc-cable-management" class="nav-link" data-scroll-target="#cable-management">Cable Management</a>
   <ul class="collapse">
-  <li><a href="#install-hardware_tools-in-development-mode" id="toc-install-hardware_tools-in-development-mode" class="nav-link" data-scroll-target="#install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</a></li>
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">power</a></li>
+  <li><a href="#connections" id="toc-connections" class="nav-link" data-scroll-target="#connections">Connections</a></li>
   </ul></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a>
-  <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
-  </ul></li>
-  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a></li>
+  <li><a href="#home-network" id="toc-home-network" class="nav-link" data-scroll-target="#home-network">Home Network</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="p_05_spec.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="p_05_spec.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="p_05_spec.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hardware_Tools</h1>
+<h1 class="title">Spec</h1>
 </div>
 
+<div>
+  <div class="description">
+    Spec
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -244,47 +214,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<p>This file will become your README and also the index of your documentation.</p>
-<section id="developer-guide" class="level2">
-<h2 class="anchored" data-anchor-id="developer-guide">Developer Guide</h2>
-<p>If you are new to using <code>nbdev</code> here are some useful pointers to get you started.</p>
-<section id="install-hardware_tools-in-development-mode" class="level3">
-<h3 class="anchored" data-anchor-id="install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure Hardware_Tools package is installed in development mode</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install <span class="at">-e</span> .</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make changes under nbs/ directory</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># compile to have changes apply to Hardware_Tools</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nbdev_prepare</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="laptop---specs" class="level2">
+<h2 class="anchored" data-anchor-id="laptop---specs">Laptop - Specs</h2>
+<ul>
+<li>Cpu - Amd</li>
+<li>Ram - 32gb</li>
+<li>Memory - 1 TB</li>
+<li>Battery - long life</li>
+<li>Screen - high res/ OLED</li>
+</ul>
+</section>
+<section id="monitors---specs" class="level2">
+<h2 class="anchored" data-anchor-id="monitors---specs">Monitors - Specs</h2>
+<ul>
+<li>Refresh rate - 144Hz</li>
+<li>Resolution - 4K</li>
+<li>Size -</li>
+<li>HDR</li>
+<li>Display types - VA , IPS , OLED (best)</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Size</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1080p - 1920x1080</td>
+<td>24 inchx</td>
+</tr>
+<tr class="even">
+<td>1440p - 2560×1440</td>
+<td>27 inch</td>
+</tr>
+<tr class="odd">
+<td>4K - 4096×2160</td>
+<td>32 inch</td>
+</tr>
+</tbody>
+</table>
+<p><strong>kogan is good</strong></p>
+</section>
+<section id="cable-management" class="level2">
+<h2 class="anchored" data-anchor-id="cable-management">Cable Management</h2>
+<section id="power" class="level3">
+<h3 class="anchored" data-anchor-id="power">power</h3>
+<ul>
+<li>laptop (easy access - left)</li>
+<li>monitor (hidden - right)</li>
+<li>2 x Lights (usb) (right)</li>
+<li>Fan (easy access - left)</li>
+<li>Phone charger (right)</li>
+</ul>
+</section>
+<section id="connections" class="level3">
+<h3 class="anchored" data-anchor-id="connections">Connections</h3>
+<ul>
+<li>Monitor -&gt; laptop (hdmi)</li>
+</ul>
 </section>
 </section>
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<section id="installation" class="level3">
-<h3 class="anchored" data-anchor-id="installation">Installation</h3>
-<p>Install latest from the GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install git+https://github.com/bthek1/Hardware_Tools.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda install <span class="at">-c</span> bthek1 Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://pypi.org/project/Hardware_Tools/">pypi</a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="documentation" class="level3">
-<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
-<p>Documentation can be found hosted on this GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>’s <a href="https://bthek1.github.io/Hardware_Tools/">pages</a>. Additionally you can find package manager specific guidelines on <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a> and <a href="https://pypi.org/project/Hardware_Tools/">pypi</a> respectively.</p>
-</section>
-</section>
-<section id="how-to-use" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use">How to use</h2>
-<p>Fill me in please! Don’t forget code examples:</p>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre><code>2</code></pre>
-</div>
-</div>
+<section id="home-network" class="level2">
+<h2 class="anchored" data-anchor-id="home-network">Home Network</h2>
+<ul>
+<li><p>192.168.1.1 - THEKKEL_MAIN</p></li>
+<li><p>192.168.1.2 - THEKKEL_MESH</p></li>
+<li><p>move all the devices to mesh</p></li>
+<li><p>connect mesh to modem</p></li>
+<li><p>have black router as backup</p></li>
+</ul>
 
 
 </section>

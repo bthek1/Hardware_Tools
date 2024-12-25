@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Everything to know about Smart RGb lighting">
 
-<title>Hardware_Tools</title>
+<title>RGB Lighting – Hardware_Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,11 +70,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Hardware_Tools">
-<meta property="og:description" content="">
+<meta property="og:title" content="RGB Lighting – Hardware_Tools">
+<meta property="og:description" content="Everything to know about Smart RGb lighting">
 <meta property="og:site_name" content="Hardware_Tools">
-<meta name="twitter:title" content="Hardware_Tools">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="RGB Lighting – Hardware_Tools">
+<meta name="twitter:description" content="Everything to know about Smart RGb lighting">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -132,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Hardware_Tools</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rgb_lighting_build.html">RGB Lighting</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -146,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hardware_Tools</span></a>
   </div>
 </li>
@@ -164,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rgb_lighting_build.html" class="sidebar-item-text sidebar-link">
+  <a href="./rgb_lighting_build.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">RGB Lighting</span></a>
   </div>
 </li>
@@ -208,27 +175,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#developer-guide" id="toc-developer-guide" class="nav-link active" data-scroll-target="#developer-guide">Developer Guide</a>
-  <ul class="collapse">
-  <li><a href="#install-hardware_tools-in-development-mode" id="toc-install-hardware_tools-in-development-mode" class="nav-link" data-scroll-target="#install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</a></li>
-  </ul></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a>
-  <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
-  </ul></li>
-  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a></li>
+  <li><a href="#types-of-rgb-smart-led-strips" id="toc-types-of-rgb-smart-led-strips" class="nav-link active" data-scroll-target="#types-of-rgb-smart-led-strips">1. <strong>Types of RGB Smart LED Strips</strong></a></li>
+  <li><a href="#voltage" id="toc-voltage" class="nav-link" data-scroll-target="#voltage">2. <strong>Voltage</strong></a></li>
+  <li><a href="#addressable-vs-non-addressable-strips" id="toc-addressable-vs-non-addressable-strips" class="nav-link" data-scroll-target="#addressable-vs-non-addressable-strips">3. <strong>Addressable vs Non-addressable Strips</strong></a></li>
+  <li><a href="#number-of-leds-per-meter" id="toc-number-of-leds-per-meter" class="nav-link" data-scroll-target="#number-of-leds-per-meter">4. <strong>Number of LEDs per Meter</strong></a></li>
+  <li><a href="#power-consumption" id="toc-power-consumption" class="nav-link" data-scroll-target="#power-consumption">5. <strong>Power Consumption</strong></a></li>
+  <li><a href="#control-methods" id="toc-control-methods" class="nav-link" data-scroll-target="#control-methods">6. <strong>Control Methods</strong></a></li>
+  <li><a href="#compatibility-with-software" id="toc-compatibility-with-software" class="nav-link" data-scroll-target="#compatibility-with-software">7. <strong>Compatibility with Software</strong></a></li>
+  <li><a href="#waterproofing" id="toc-waterproofing" class="nav-link" data-scroll-target="#waterproofing">8. <strong>Waterproofing</strong></a></li>
+  <li><a href="#durability-and-longevity" id="toc-durability-and-longevity" class="nav-link" data-scroll-target="#durability-and-longevity">9. <strong>Durability and Longevity</strong></a></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">10. <strong>Use Cases</strong></a></li>
+  <li><a href="#things-to-keep-in-mind" id="toc-things-to-keep-in-mind" class="nav-link" data-scroll-target="#things-to-keep-in-mind">Things to Keep in Mind:</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="rgb_lighting_build.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="rgb_lighting_build.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="rgb_lighting_build.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hardware_Tools</h1>
+<h1 class="title">RGB Lighting</h1>
 </div>
 
+<div>
+  <div class="description">
+    Everything to know about Smart RGb lighting
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -244,47 +217,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<p>This file will become your README and also the index of your documentation.</p>
-<section id="developer-guide" class="level2">
-<h2 class="anchored" data-anchor-id="developer-guide">Developer Guide</h2>
-<p>If you are new to using <code>nbdev</code> here are some useful pointers to get you started.</p>
-<section id="install-hardware_tools-in-development-mode" class="level3">
-<h3 class="anchored" data-anchor-id="install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure Hardware_Tools package is installed in development mode</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install <span class="at">-e</span> .</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make changes under nbs/ directory</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># compile to have changes apply to Hardware_Tools</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nbdev_prepare</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>RGB smart LED strips, like the WS2818B and other models, are popular for customizable lighting projects. They offer flexibility, addressable LEDs, and dynamic lighting effects. Here’s what you should know about the types, features, and considerations when choosing RGB smart LED strips:</p>
+<section id="types-of-rgb-smart-led-strips" class="level3">
+<h3 class="anchored" data-anchor-id="types-of-rgb-smart-led-strips">1. <strong>Types of RGB Smart LED Strips</strong></h3>
+<p>There are various types of RGB LED strips, often distinguished by the type of LED, chipset, and control methods:</p>
+<ul>
+<li><strong>WS2812B/WS2813</strong>:
+<ul>
+<li>Each LED is individually addressable, meaning each LED can be controlled independently for color and brightness.</li>
+<li>WS2813 is a newer version, which has backup data lines for redundancy; if one LED fails, the rest will still work.</li>
+<li>1 data line, which simplifies wiring.</li>
+</ul></li>
+<li><strong>WS2818B</strong>:
+<ul>
+<li>Dual-signal redundancy: If one LED fails, others in the series will continue functioning.</li>
+<li>Addressable RGB LEDs with two data lines (Data and Backup Data).</li>
+<li>Supports longer continuous runs compared to single-line strips like WS2812B due to improved data integrity.</li>
+<li>Ideal for large, complex installations or places where reliability is essential.</li>
+</ul></li>
+<li><strong>SK6812</strong>:
+<ul>
+<li>Similar to WS2812B but with better color accuracy.</li>
+<li>Can support RGBW (RGB + white), adding a true white LED for more precise lighting effects.</li>
+<li>Compatible with WS2812B controllers.</li>
+</ul></li>
+<li><strong>APA102 (DotStar)</strong>:
+<ul>
+<li>Uses a separate clock and data line, enabling faster updates and smoother animations.</li>
+<li>Better suited for high refresh-rate applications or when a faster response is needed.</li>
+</ul></li>
+</ul>
 </section>
+<section id="voltage" class="level3">
+<h3 class="anchored" data-anchor-id="voltage">2. <strong>Voltage</strong></h3>
+<ul>
+<li><strong>5V</strong>: Common in WS2812B and WS2813 strips. Requires a power supply with good regulation, as voltage drop can be an issue over long distances.</li>
+<li><strong>12V</strong>: Common in WS2818B strips. Offers less voltage drop, making it better for longer runs without needing power injection.</li>
+<li><strong>24V</strong>: Available in some variants. Ideal for very long strips with less voltage loss, meaning fewer power injections are required.</li>
+</ul>
 </section>
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<section id="installation" class="level3">
-<h3 class="anchored" data-anchor-id="installation">Installation</h3>
-<p>Install latest from the GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install git+https://github.com/bthek1/Hardware_Tools.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda install <span class="at">-c</span> bthek1 Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://pypi.org/project/Hardware_Tools/">pypi</a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="addressable-vs-non-addressable-strips" class="level3">
+<h3 class="anchored" data-anchor-id="addressable-vs-non-addressable-strips">3. <strong>Addressable vs Non-addressable Strips</strong></h3>
+<ul>
+<li><strong>Addressable (e.g., WS2818B, WS2812B)</strong>: Each LED can be controlled independently, allowing for more complex effects like color waves, animations, and patterns.</li>
+<li><strong>Non-addressable (RGB)</strong>: All LEDs show the same color and brightness at any given time.</li>
+</ul>
 </section>
-<section id="documentation" class="level3">
-<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
-<p>Documentation can be found hosted on this GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>’s <a href="https://bthek1.github.io/Hardware_Tools/">pages</a>. Additionally you can find package manager specific guidelines on <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a> and <a href="https://pypi.org/project/Hardware_Tools/">pypi</a> respectively.</p>
+<section id="number-of-leds-per-meter" class="level3">
+<h3 class="anchored" data-anchor-id="number-of-leds-per-meter">4. <strong>Number of LEDs per Meter</strong></h3>
+<p>LED strips are typically available in densities like <strong>30 LEDs/m</strong>, <strong>60 LEDs/m</strong>, <strong>144 LEDs/m</strong>. Higher densities (more LEDs per meter): - Offer brighter and smoother lighting effects. - Are better for complex animations. - Consume more power.</p>
 </section>
+<section id="power-consumption" class="level3">
+<h3 class="anchored" data-anchor-id="power-consumption">5. <strong>Power Consumption</strong></h3>
+<ul>
+<li>Power consumption depends on the number of LEDs and the type of strip. For instance:
+<ul>
+<li>WS2812B strips typically consume around <strong>18W per meter</strong> at full brightness for 60 LEDs/m.</li>
+<li>WS2818B with 60 LEDs/m might consume a similar amount, but the 12V version reduces the effects of voltage drop over longer strips.</li>
+</ul></li>
+<li>Ensure your power supply provides adequate power for the entire strip, and consider injecting power at multiple points for longer strips to prevent brightness dimming.</li>
+</ul>
 </section>
-<section id="how-to-use" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use">How to use</h2>
-<p>Fill me in please! Don’t forget code examples:</p>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre><code>2</code></pre>
-</div>
-</div>
+<section id="control-methods" class="level3">
+<h3 class="anchored" data-anchor-id="control-methods">6. <strong>Control Methods</strong></h3>
+<ul>
+<li><strong>Controllers</strong>: Addressable LED strips need a controller that can send the appropriate signals. Popular options include:
+<ul>
+<li><strong>Arduino/ESP32/Raspberry Pi</strong>: For DIY projects.</li>
+<li><strong>Dedicated Controllers</strong>: Like the SP108E or SP110E, designed specifically for addressable LED strips.</li>
+</ul></li>
+<li><strong>Communication Protocols</strong>:
+<ul>
+<li><strong>Wi-Fi/Bluetooth</strong>: Many smart LED strips come with Wi-Fi or Bluetooth control, allowing you to adjust lighting through apps.</li>
+<li><strong>DMX</strong>: Used in professional lighting setups, enabling synchronized control across multiple strips.</li>
+</ul></li>
+</ul>
+</section>
+<section id="compatibility-with-software" class="level3">
+<h3 class="anchored" data-anchor-id="compatibility-with-software">7. <strong>Compatibility with Software</strong></h3>
+<p>Addressable LED strips, like WS2818B and WS2812B, are compatible with various software and libraries, such as: - <strong>FastLED/Adafruit NeoPixel</strong>: Arduino libraries for controlling addressable RGB strips. - <strong>WLED</strong>: A highly popular, customizable firmware for controlling addressable LED strips with a web interface, mobile apps, and voice assistants like Alexa.</p>
+</section>
+<section id="waterproofing" class="level3">
+<h3 class="anchored" data-anchor-id="waterproofing">8. <strong>Waterproofing</strong></h3>
+<ul>
+<li><strong>IP20</strong>: No waterproofing, suitable for indoor, dry environments.</li>
+<li><strong>IP65</strong>: Silicone coating, protects against dust and light splashes, good for indoor use in damp environments.</li>
+<li><strong>IP67/IP68</strong>: Fully waterproof, can be submerged in water, ideal for outdoor applications.</li>
+</ul>
+</section>
+<section id="durability-and-longevity" class="level3">
+<h3 class="anchored" data-anchor-id="durability-and-longevity">9. <strong>Durability and Longevity</strong></h3>
+<ul>
+<li>Ensure the strip you choose has good heat dissipation. Addressable LEDs like WS2818B can generate heat, especially at higher brightness levels, which might reduce their lifespan.</li>
+<li>Aluminum profiles or channels can be used to house the LED strips for better cooling and aesthetic purposes.</li>
+</ul>
+</section>
+<section id="use-cases" class="level3">
+<h3 class="anchored" data-anchor-id="use-cases">10. <strong>Use Cases</strong></h3>
+<ul>
+<li><strong>Home decoration</strong>: Accent lighting, TV backlighting, and ambiance lighting.</li>
+<li><strong>Commercial installations</strong>: Advertising displays, bar lighting, and retail ambiance.</li>
+<li><strong>Creative projects</strong>: Custom lighting setups, cosplay, and art installations.</li>
+<li><strong>Outdoor lighting</strong>: Gardens, pathways, or building outlines (with waterproof strips).</li>
+<li><strong>Advanced projects</strong>: Synchronize lighting with music, game setups, or AI-controlled smart home lighting.</li>
+</ul>
+</section>
+<section id="things-to-keep-in-mind" class="level3">
+<h3 class="anchored" data-anchor-id="things-to-keep-in-mind">Things to Keep in Mind:</h3>
+<ul>
+<li><strong>Power Supply</strong>: Ensure the power supply matches the voltage and provides enough current for your strip.</li>
+<li><strong>Heat Management</strong>: Addressable strips can get hot, so consider using aluminum channels for heat dissipation.</li>
+<li><strong>Distance Limitation</strong>: For longer runs, you might need to inject power at multiple points to avoid voltage drop, especially with 5V strips.</li>
+<li><strong>Data Line Length</strong>: Data signal integrity can degrade over long distances. For strips like WS2818B with dual-signal redundancy, this is less of an issue.</li>
+</ul>
+<p>Understanding these factors will help you choose the right RGB smart LED strip for your project, ensuring you get the desired effects, performance, and longevity.</p>
 
 
 </section>

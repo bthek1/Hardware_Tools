@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Home Assistant is an open-source platform designed for home automation, allowing you to control smart devices, automate tasks, and monitor various home sensors in a unified interface. With a strong emphasis on privacy and local control, Home Assistant runs on devices within your network and provides broad support for smart home devices. Here’s an overview of everything you need to know about setting up, using, and customizing Home Assistant.">
 
-<title>Hardware_Tools</title>
+<title>Home Assistant – Hardware_Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,11 +104,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Hardware_Tools">
-<meta property="og:description" content="">
+<meta property="og:title" content="Home Assistant – Hardware_Tools">
+<meta property="og:description" content="Home Assistant is an open-source platform designed for home automation, allowing you to control smart devices, automate tasks, and monitor various home sensors in a unified interface. With a strong emphasis on privacy and local control, Home Assistant runs on devices within your network and provides broad support for smart home devices. Here’s an overview of everything you need to know about setting up, using, and customizing Home Assistant.">
 <meta property="og:site_name" content="Hardware_Tools">
-<meta name="twitter:title" content="Hardware_Tools">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="Home Assistant – Hardware_Tools">
+<meta name="twitter:description" content="Home Assistant is an open-source platform designed for home automation, allowing you to control smart devices, automate tasks, and monitor various home sensors in a unified interface. With a strong emphasis on privacy and local control, Home Assistant runs on devices within your network and provides broad support for smart home devices. Here’s an overview of everything you need to know about setting up, using, and customizing Home Assistant.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -132,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Hardware_Tools</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_assistant.html">Home Assistant</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -146,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hardware_Tools</span></a>
   </div>
 </li>
@@ -176,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assistant.html" class="sidebar-item-text sidebar-link">
+  <a href="./home_assistant.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Home Assistant</span></a>
   </div>
 </li>
@@ -208,27 +209,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#developer-guide" id="toc-developer-guide" class="nav-link active" data-scroll-target="#developer-guide">Developer Guide</a>
-  <ul class="collapse">
-  <li><a href="#install-hardware_tools-in-development-mode" id="toc-install-hardware_tools-in-development-mode" class="nav-link" data-scroll-target="#install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</a></li>
-  </ul></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a>
-  <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
-  </ul></li>
-  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a></li>
+  <li><a href="#what-is-home-assistant" id="toc-what-is-home-assistant" class="nav-link active" data-scroll-target="#what-is-home-assistant">1. <strong>What is Home Assistant?</strong></a></li>
+  <li><a href="#home-assistant-installation-options" id="toc-home-assistant-installation-options" class="nav-link" data-scroll-target="#home-assistant-installation-options">2. <strong>Home Assistant Installation Options</strong></a></li>
+  <li><a href="#user-interface" id="toc-user-interface" class="nav-link" data-scroll-target="#user-interface">3. <strong>User Interface</strong></a></li>
+  <li><a href="#integrations-and-device-support" id="toc-integrations-and-device-support" class="nav-link" data-scroll-target="#integrations-and-device-support">4. <strong>Integrations and Device Support</strong></a></li>
+  <li><a href="#automation-and-scripts" id="toc-automation-and-scripts" class="nav-link" data-scroll-target="#automation-and-scripts">5. <strong>Automation and Scripts</strong></a></li>
+  <li><a href="#add-ons-and-extensions" id="toc-add-ons-and-extensions" class="nav-link" data-scroll-target="#add-ons-and-extensions">6. <strong>Add-Ons and Extensions</strong></a></li>
+  <li><a href="#data-storage-and-analysis" id="toc-data-storage-and-analysis" class="nav-link" data-scroll-target="#data-storage-and-analysis">7. <strong>Data Storage and Analysis</strong></a></li>
+  <li><a href="#voice-assistant-integration" id="toc-voice-assistant-integration" class="nav-link" data-scroll-target="#voice-assistant-integration">8. <strong>Voice Assistant Integration</strong></a></li>
+  <li><a href="#security-and-remote-access" id="toc-security-and-remote-access" class="nav-link" data-scroll-target="#security-and-remote-access">9. <strong>Security and Remote Access</strong></a></li>
+  <li><a href="#energy-monitoring" id="toc-energy-monitoring" class="nav-link" data-scroll-target="#energy-monitoring">10. <strong>Energy Monitoring</strong></a></li>
+  <li><a href="#home-assistant-companion-apps" id="toc-home-assistant-companion-apps" class="nav-link" data-scroll-target="#home-assistant-companion-apps">11. <strong>Home Assistant Companion Apps</strong></a></li>
+  <li><a href="#advanced-customization-and-theming" id="toc-advanced-customization-and-theming" class="nav-link" data-scroll-target="#advanced-customization-and-theming">12. <strong>Advanced Customization and Theming</strong></a></li>
+  <li><a href="#examples-of-common-automations" id="toc-examples-of-common-automations" class="nav-link" data-scroll-target="#examples-of-common-automations">13. <strong>Examples of Common Automations</strong></a></li>
+  <li><a href="#backup-and-restore" id="toc-backup-and-restore" class="nav-link" data-scroll-target="#backup-and-restore">14. <strong>Backup and Restore</strong></a></li>
+  <li><a href="#getting-started-with-home-assistant" id="toc-getting-started-with-home-assistant" class="nav-link" data-scroll-target="#getting-started-with-home-assistant">15. <strong>Getting Started with Home Assistant</strong></a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="index.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="home_assistant.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li><li><a href="home_assistant.html.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="home_assistant.html.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hardware_Tools</h1>
+<h1 class="title">Home Assistant</h1>
 </div>
 
+<div>
+  <div class="description">
+    <strong>Home Assistant</strong> is an open-source platform designed for home automation, allowing you to control smart devices, automate tasks, and monitor various home sensors in a unified interface. With a strong emphasis on privacy and local control, Home Assistant runs on devices within your network and provides broad support for smart home devices. Here’s an overview of everything you need to know about setting up, using, and customizing Home Assistant.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -244,47 +255,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<p>This file will become your README and also the index of your documentation.</p>
-<section id="developer-guide" class="level2">
-<h2 class="anchored" data-anchor-id="developer-guide">Developer Guide</h2>
-<p>If you are new to using <code>nbdev</code> here are some useful pointers to get you started.</p>
-<section id="install-hardware_tools-in-development-mode" class="level3">
-<h3 class="anchored" data-anchor-id="install-hardware_tools-in-development-mode">Install Hardware_Tools in Development mode</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure Hardware_Tools package is installed in development mode</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install <span class="at">-e</span> .</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make changes under nbs/ directory</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># compile to have changes apply to Hardware_Tools</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nbdev_prepare</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="what-is-home-assistant" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-home-assistant">1. <strong>What is Home Assistant?</strong></h3>
+<ul>
+<li><strong>Open Source</strong>: Free and community-driven, with a large ecosystem of add-ons, custom integrations, and a vibrant user community.</li>
+<li><strong>Local Control</strong>: Designed to run entirely on your local network, enhancing privacy and reducing latency.</li>
+<li><strong>Automations and Integrations</strong>: Integrates with over 2,000 devices and services, from Philips Hue lights to Nest thermostats to MQTT sensors.</li>
+<li><strong>Cross-Platform</strong>: Compatible with Raspberry Pi, Docker, virtual machines, NAS devices, and even cloud-hosted platforms.</li>
+</ul>
+</section>
+<section id="home-assistant-installation-options" class="level3">
+<h3 class="anchored" data-anchor-id="home-assistant-installation-options">2. <strong>Home Assistant Installation Options</strong></h3>
+<ul>
+<li><strong>Home Assistant OS</strong>: The simplest and recommended option, an all-in-one system with the OS and Home Assistant pre-installed. Ideal for Raspberry Pi and other single-board computers.</li>
+<li><strong>Home Assistant Supervised</strong>: Runs Home Assistant on top of Debian with add-ons and updates similar to Home Assistant OS. Requires more technical knowledge.</li>
+<li><strong>Home Assistant Container</strong>: Runs Home Assistant as a Docker container, allowing you to manage only Home Assistant without the OS features.</li>
+<li><strong>Home Assistant Core</strong>: A Python-based installation for advanced users, where you install only the Home Assistant application on an existing Python environment.</li>
+</ul>
+</section>
+<section id="user-interface" class="level3">
+<h3 class="anchored" data-anchor-id="user-interface">3. <strong>User Interface</strong></h3>
+<ul>
+<li><strong>Dashboard (Lovelace UI)</strong>: Fully customizable interface to control devices, view sensor data, and manage automations. Supports themes, cards, and custom widgets.</li>
+<li><strong>Sidebar</strong>: Quick access to the main features, such as Overview, Map, Logbook, History, and Configuration.</li>
+<li><strong>Custom Dashboards</strong>: You can create multiple dashboards for different rooms or users and set up roles to limit access to certain dashboards.</li>
+</ul>
+</section>
+<section id="integrations-and-device-support" class="level3">
+<h3 class="anchored" data-anchor-id="integrations-and-device-support">4. <strong>Integrations and Device Support</strong></h3>
+<ul>
+<li><strong>Official Integrations</strong>: Over 2,000 built-in integrations for smart home devices, including Philips Hue, Nest, Amazon Alexa, Google Home, Sonos, and Zigbee.</li>
+<li><strong>Custom Integrations</strong>: Community-made integrations are available, and you can add custom components using Home Assistant’s custom components directory.</li>
+<li><strong>Zigbee, Z-Wave, and MQTT</strong>:
+<ul>
+<li><strong>Zigbee and Z-Wave</strong>: Requires USB dongles to control Zigbee or Z-Wave devices. Common choices include the ConBee II and Aeotec Z-Wave sticks.</li>
+<li><strong>MQTT</strong>: A lightweight protocol for connecting IoT devices, supported by many devices and Home Assistant.</li>
+</ul></li>
+</ul>
+</section>
+<section id="automation-and-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="automation-and-scripts">5. <strong>Automation and Scripts</strong></h3>
+<ul>
+<li><strong>Automation</strong>: The core feature for setting up automated actions. Automations consist of <strong>triggers</strong>, <strong>conditions</strong>, and <strong>actions</strong>.</li>
+<li><strong>Scripts</strong>: Allow for more complex sequences of actions, reusable in multiple automations.</li>
+<li><strong>Blueprints</strong>: Shared automation templates that simplify creating automations without needing to write code from scratch.</li>
+<li><strong>YAML and Visual Editor</strong>: Home Assistant supports both YAML-based and visual automation editors. YAML is more flexible and is ideal for advanced automations.</li>
+</ul>
+<section id="basic-automation-example" class="level4">
+<h4 class="anchored" data-anchor-id="basic-automation-example">Basic Automation Example</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">automation</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">alias</span><span class="kw">:</span><span class="at"> Turn on lights at sunset</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">trigger</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">platform</span><span class="kw">:</span><span class="at"> sun</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">event</span><span class="kw">:</span><span class="at"> sunset</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">action</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">service</span><span class="kw">:</span><span class="at"> light.turn_on</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">entity_id</span><span class="kw">:</span><span class="at"> light.living_room</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<section id="installation" class="level3">
-<h3 class="anchored" data-anchor-id="installation">Installation</h3>
-<p>Install latest from the GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install git+https://github.com/bthek1/Hardware_Tools.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda install <span class="at">-c</span> bthek1 Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://pypi.org/project/Hardware_Tools/">pypi</a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install Hardware_Tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="add-ons-and-extensions" class="level3">
+<h3 class="anchored" data-anchor-id="add-ons-and-extensions">6. <strong>Add-Ons and Extensions</strong></h3>
+<ul>
+<li><strong>Supervisor Add-Ons</strong>: Extend Home Assistant’s functionality, similar to plugins. Examples include <strong>File Editor</strong> (for editing configuration files), <strong>Samba Share</strong> (for file access), <strong>Node-RED</strong> (for advanced automation), <strong>Mosquitto MQTT broker</strong>, <strong>ESPHome</strong>, and <strong>DuckDNS</strong> (for remote access).</li>
+<li><strong>HACS (Home Assistant Community Store)</strong>: An unofficial add-on that provides access to custom themes, integrations, and front-end components.</li>
+</ul>
 </section>
-<section id="documentation" class="level3">
-<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
-<p>Documentation can be found hosted on this GitHub <a href="https://github.com/bthek1/Hardware_Tools">repository</a>’s <a href="https://bthek1.github.io/Hardware_Tools/">pages</a>. Additionally you can find package manager specific guidelines on <a href="https://anaconda.org/bthek1/Hardware_Tools">conda</a> and <a href="https://pypi.org/project/Hardware_Tools/">pypi</a> respectively.</p>
+<section id="data-storage-and-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="data-storage-and-analysis">7. <strong>Data Storage and Analysis</strong></h3>
+<ul>
+<li><strong>Database</strong>: Home Assistant uses SQLite by default to store historical data, including sensor data, state changes, and logs.</li>
+<li><strong>Long-Term Data Storage</strong>: For large data needs, you can configure Home Assistant to use an external database, such as MySQL or PostgreSQL.</li>
+<li><strong>History and Logbook</strong>: Track device usage, automations, and state changes. Useful for debugging and understanding patterns in smart device use.</li>
+</ul>
 </section>
+<section id="voice-assistant-integration" class="level3">
+<h3 class="anchored" data-anchor-id="voice-assistant-integration">8. <strong>Voice Assistant Integration</strong></h3>
+<ul>
+<li><strong>Amazon Alexa and Google Assistant</strong>: Home Assistant integrates with both, allowing you to control devices via voice. Setting up may require some cloud services or linking your Home Assistant instance to your voice assistant account.</li>
+<li><strong>Home Assistant Companion App</strong>: Provides voice commands, location tracking, and notifications on both iOS and Android.</li>
+<li><strong>Local Voice Control</strong>: With tools like Rhasspy and Almond, you can set up local, private voice control directly within Home Assistant.</li>
+</ul>
 </section>
-<section id="how-to-use" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use">How to use</h2>
-<p>Fill me in please! Don’t forget code examples:</p>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre><code>2</code></pre>
-</div>
-</div>
+<section id="security-and-remote-access" class="level3">
+<h3 class="anchored" data-anchor-id="security-and-remote-access">9. <strong>Security and Remote Access</strong></h3>
+<ul>
+<li><strong>HTTPS with DuckDNS and Let’s Encrypt</strong>: DuckDNS add-on provides a free domain name and integrates with Let’s Encrypt to set up HTTPS encryption.</li>
+<li><strong>Nabu Casa</strong>: A paid service from Home Assistant that offers secure remote access without needing port forwarding, along with voice assistant integration and Alexa/Google Assistant linking.</li>
+<li><strong>User Accounts and Permissions</strong>: Multi-user support with different access levels, allowing limited or full access based on roles.</li>
+<li><strong>Two-Factor Authentication (2FA)</strong>: Enhances security by requiring a second factor to access your Home Assistant instance.</li>
+</ul>
+</section>
+<section id="energy-monitoring" class="level3">
+<h3 class="anchored" data-anchor-id="energy-monitoring">10. <strong>Energy Monitoring</strong></h3>
+<ul>
+<li><strong>Energy Dashboard</strong>: Introduced in 2021, it provides real-time and historical views of energy consumption and solar production, if applicable.</li>
+<li><strong>Energy Integrations</strong>: Home Assistant supports various smart energy meters and integrates with inverters and other devices to track energy consumption, production, and costs.</li>
+</ul>
+</section>
+<section id="home-assistant-companion-apps" class="level3">
+<h3 class="anchored" data-anchor-id="home-assistant-companion-apps">11. <strong>Home Assistant Companion Apps</strong></h3>
+<ul>
+<li><strong>Android and iOS Apps</strong>: Home Assistant’s mobile apps offer remote access, push notifications, and device tracking.</li>
+<li><strong>Device Tracking</strong>: The apps report device location, battery status, Wi-Fi, and more, which can be used for automations (e.g., turning on lights when you arrive home).</li>
+</ul>
+</section>
+<section id="advanced-customization-and-theming" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-customization-and-theming">12. <strong>Advanced Customization and Theming</strong></h3>
+<ul>
+<li><strong>Themes</strong>: Customize the look of Home Assistant with custom themes, which can be installed via HACS or manually configured in YAML.</li>
+<li><strong>Custom Cards</strong>: With HACS, you can add custom Lovelace cards for unique interfaces, like weather cards, gauge charts, and alarm panels.</li>
+<li><strong>Developer Tools</strong>: Built-in developer tools help with testing automations, running services, and managing states.</li>
+</ul>
+</section>
+<section id="examples-of-common-automations" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-common-automations">13. <strong>Examples of Common Automations</strong></h3>
+<ul>
+<li><strong>Lighting Control</strong>: Automate lights to turn on at sunset or based on motion sensors.</li>
+<li><strong>Climate Control</strong>: Adjust thermostats based on room occupancy, time of day, or outdoor temperature.</li>
+<li><strong>Security</strong>: Trigger cameras, alarms, or notifications based on door/window sensors or motion detectors.</li>
+<li><strong>Energy Management</strong>: Track energy use, receive notifications on high usage, or automate heavy loads to run during off-peak hours.</li>
+<li><strong>Presence Detection</strong>: Control devices based on whether family members are home or away using phone tracking, Wi-Fi presence, or Bluetooth.</li>
+</ul>
+</section>
+<section id="backup-and-restore" class="level3">
+<h3 class="anchored" data-anchor-id="backup-and-restore">14. <strong>Backup and Restore</strong></h3>
+<ul>
+<li><strong>Snapshots</strong>: Home Assistant can create snapshots (backups) that save the current state of the system, add-ons, configurations, and data. These are useful for migrating to a new installation or restoring after a crash.</li>
+<li><strong>Automated Backups</strong>: You can set up automated snapshots and offload them to cloud storage, such as Google Drive, for additional redundancy.</li>
+</ul>
+</section>
+<section id="getting-started-with-home-assistant" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started-with-home-assistant">15. <strong>Getting Started with Home Assistant</strong></h3>
+<ol type="1">
+<li><strong>Install Home Assistant OS</strong> on a Raspberry Pi or virtual machine.</li>
+<li><strong>Set up a few key integrations</strong> like your lights, thermostat, and sensors.</li>
+<li><strong>Create simple automations</strong> using the visual editor.</li>
+<li><strong>Explore Lovelace</strong> to customize your dashboard.</li>
+<li><strong>Install add-ons</strong> like HACS and Node-RED to enhance functionality.</li>
+</ol>
 
 
 </section>

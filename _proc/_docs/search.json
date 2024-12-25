@@ -1,0 +1,562 @@
+[
+  {
+    "objectID": "raspberry_pi_5.html",
+    "href": "raspberry_pi_5.html",
+    "title": "Raspberry PI Setup",
+    "section": "",
+    "text": "Processor: Quad-core Cortex-A76 CPU at 2.4 GHz (upgraded for improved performance).\nRAM: Available in configurations of 4GB or 8GB LPDDR4x, with faster memory than previous models.\nPorts:\n\nDual micro-HDMI ports (4K output on each port).\nUSB 3.0 and USB 2.0 ports for faster data transfer.\nGigabit Ethernet and dual USB-C ports (one for power, one for peripherals).\nM.2 PCIe slot (new) for connecting NVMe SSD storage.\n\nOperating System: Raspberry Pi OS (based on Debian), but supports other OS options, including Ubuntu.\n\n\n\n\n\nRaspberry Pi 5 board (8GB model).\nMicroSD card (minimum 16GB recommended) or an M.2 SSD if using NVMe storage.\nPower supply: USB-C 5V/5A recommended for stable operation.\nMicro-HDMI cable to connect to a display.\nKeyboard and mouse (USB or Bluetooth).\nInternet connection (Ethernet or WiFi).\n\n\n\n\n\n\n\nDownload the Raspberry Pi Imager software from the Raspberry Pi website.\nInsert your microSD card or connect your NVMe SSD (if using an M.2 to USB adapter) to your computer.\n\n\n\n\n\nOpen Raspberry Pi Imager and select Raspberry Pi OS (32-bit or 64-bit depending on your needs).\nGo to Edit Settings and add ssh key to laptop so you can ssh into it after boot\nCheck Wifi settings\nChoose your storage device (microSD card or external drive).\nClick Write to start the flashing process.\n\n\n\n\n\nOnce flashing is complete, insert the microSD card into the Raspberry Pi 5’s card slot or connect the SSD to the M.2 slot.\nConnect the keyboard, mouse, display, and power supply to the Pi.\n\n\n\n\n\n\nPower On: Turn on the Raspberry Pi by plugging it in. It should boot directly to Raspberry Pi OS.\nInitial Setup Wizard: The setup wizard will guide you through setting up basic configurations:\n\nLanguage and Location: Select your region, language, and keyboard layout.\nNetwork: Connect to WiFi (if not using Ethernet).\nUpdate OS: Let the system check for updates and install any available.\n\nEnable SSH and VNC (Optional): To control your Pi remotely, enable SSH and VNC:\n\nGo to Preferences &gt; Raspberry Pi Configuration &gt; Interfaces.\nEnable SSH for remote command-line access, and VNC for remote desktop access.\n\n\n\n\n\nIf you plan to use an M.2 NVMe SSD, configure the Raspberry Pi to boot from the SSD instead of the microSD card.\n\n\n\nInsert both the microSD card (with the OS installed) and the SSD into the Raspberry Pi.\nOpen a terminal and update the bootloader: bash      sudo apt update      sudo apt full-upgrade\nUse the Raspberry Pi Configuration tool or raspi-config to set the boot priority to USB or SSD.\n\n\n\n\n\nThe GPIO pins on the Raspberry Pi 5 allow you to connect external devices like sensors, LEDs, motors, and HATs. You can control these peripherals using Python libraries like RPi.GPIO or gpiozero.\nExample code to control an LED:\nimport gpiozero\n\nled = gpiozero.LED(17)  # Connect LED to GPIO pin 17\nled.on()\n\n\n\n\nPython Libraries: Raspberry Pi OS comes with Python pre-installed, but you can add popular libraries: bash      sudo apt install python3-pip      pip3 install gpiozero RPi.GPIO\nWeb Servers: If using the Pi for web development, install Apache or NGINX: bash      sudo apt install apache2\nDatabases: Install SQLite, MySQL, or PostgreSQL if you need a database. bash      sudo apt install sqlite3\n\n\n\n\nWith its increased power, the Raspberry Pi 5 (8GB RAM) can function as a modest desktop computer for web browsing, coding, and office tasks: - LibreOffice: Comes pre-installed for document editing. - Web Browser: Chromium is pre-installed, and other browsers like Firefox can be added. - Code Editors: Editors like VS Code or Thonny are popular for coding on the Raspberry Pi.\n\n\n\n\nHome Automation Hub: Use with software like Home Assistant to control IoT devices.\nNetwork Firewall or VPN: Set up Pi-hole for network-wide ad blocking, or configure OpenVPN.\nRetro Gaming Console: Use RetroPie or Recalbox to turn your Pi into a retro gaming station.\nMedia Center: Install Kodi or Plex to use the Pi as a media center.\n\n\n\n\n\nRegular Updates: Keep the OS and software up to date for security and performance. bash      sudo apt update && sudo apt upgrade -y\nBackups: Use tools like rsync to back up data to an external drive or cloud storage.",
+    "crumbs": [
+      "Raspberry PI Setup"
+    ]
+  },
+  {
+    "objectID": "raspberry_pi_5.html#setup",
+    "href": "raspberry_pi_5.html#setup",
+    "title": "Raspberry PI Setup",
+    "section": "",
+    "text": "Processor: Quad-core Cortex-A76 CPU at 2.4 GHz (upgraded for improved performance).\nRAM: Available in configurations of 4GB or 8GB LPDDR4x, with faster memory than previous models.\nPorts:\n\nDual micro-HDMI ports (4K output on each port).\nUSB 3.0 and USB 2.0 ports for faster data transfer.\nGigabit Ethernet and dual USB-C ports (one for power, one for peripherals).\nM.2 PCIe slot (new) for connecting NVMe SSD storage.\n\nOperating System: Raspberry Pi OS (based on Debian), but supports other OS options, including Ubuntu.\n\n\n\n\n\nRaspberry Pi 5 board (8GB model).\nMicroSD card (minimum 16GB recommended) or an M.2 SSD if using NVMe storage.\nPower supply: USB-C 5V/5A recommended for stable operation.\nMicro-HDMI cable to connect to a display.\nKeyboard and mouse (USB or Bluetooth).\nInternet connection (Ethernet or WiFi).\n\n\n\n\n\n\n\nDownload the Raspberry Pi Imager software from the Raspberry Pi website.\nInsert your microSD card or connect your NVMe SSD (if using an M.2 to USB adapter) to your computer.\n\n\n\n\n\nOpen Raspberry Pi Imager and select Raspberry Pi OS (32-bit or 64-bit depending on your needs).\nGo to Edit Settings and add ssh key to laptop so you can ssh into it after boot\nCheck Wifi settings\nChoose your storage device (microSD card or external drive).\nClick Write to start the flashing process.\n\n\n\n\n\nOnce flashing is complete, insert the microSD card into the Raspberry Pi 5’s card slot or connect the SSD to the M.2 slot.\nConnect the keyboard, mouse, display, and power supply to the Pi.\n\n\n\n\n\n\nPower On: Turn on the Raspberry Pi by plugging it in. It should boot directly to Raspberry Pi OS.\nInitial Setup Wizard: The setup wizard will guide you through setting up basic configurations:\n\nLanguage and Location: Select your region, language, and keyboard layout.\nNetwork: Connect to WiFi (if not using Ethernet).\nUpdate OS: Let the system check for updates and install any available.\n\nEnable SSH and VNC (Optional): To control your Pi remotely, enable SSH and VNC:\n\nGo to Preferences &gt; Raspberry Pi Configuration &gt; Interfaces.\nEnable SSH for remote command-line access, and VNC for remote desktop access.\n\n\n\n\n\nIf you plan to use an M.2 NVMe SSD, configure the Raspberry Pi to boot from the SSD instead of the microSD card.\n\n\n\nInsert both the microSD card (with the OS installed) and the SSD into the Raspberry Pi.\nOpen a terminal and update the bootloader: bash      sudo apt update      sudo apt full-upgrade\nUse the Raspberry Pi Configuration tool or raspi-config to set the boot priority to USB or SSD.\n\n\n\n\n\nThe GPIO pins on the Raspberry Pi 5 allow you to connect external devices like sensors, LEDs, motors, and HATs. You can control these peripherals using Python libraries like RPi.GPIO or gpiozero.\nExample code to control an LED:\nimport gpiozero\n\nled = gpiozero.LED(17)  # Connect LED to GPIO pin 17\nled.on()\n\n\n\n\nPython Libraries: Raspberry Pi OS comes with Python pre-installed, but you can add popular libraries: bash      sudo apt install python3-pip      pip3 install gpiozero RPi.GPIO\nWeb Servers: If using the Pi for web development, install Apache or NGINX: bash      sudo apt install apache2\nDatabases: Install SQLite, MySQL, or PostgreSQL if you need a database. bash      sudo apt install sqlite3\n\n\n\n\nWith its increased power, the Raspberry Pi 5 (8GB RAM) can function as a modest desktop computer for web browsing, coding, and office tasks: - LibreOffice: Comes pre-installed for document editing. - Web Browser: Chromium is pre-installed, and other browsers like Firefox can be added. - Code Editors: Editors like VS Code or Thonny are popular for coding on the Raspberry Pi.\n\n\n\n\nHome Automation Hub: Use with software like Home Assistant to control IoT devices.\nNetwork Firewall or VPN: Set up Pi-hole for network-wide ad blocking, or configure OpenVPN.\nRetro Gaming Console: Use RetroPie or Recalbox to turn your Pi into a retro gaming station.\nMedia Center: Install Kodi or Plex to use the Pi as a media center.\n\n\n\n\n\nRegular Updates: Keep the OS and software up to date for security and performance. bash      sudo apt update && sudo apt upgrade -y\nBackups: Use tools like rsync to back up data to an external drive or cloud storage.",
+    "crumbs": [
+      "Raspberry PI Setup"
+    ]
+  },
+  {
+    "objectID": "raspberry_pi_5.html#vnc",
+    "href": "raspberry_pi_5.html#vnc",
+    "title": "Raspberry PI Setup",
+    "section": "VNC",
+    "text": "VNC\n\nInstall tigervnc\nsudo apt install tigervnc-standalone-server tigervnc-viewer -y\n\n\nAdd .files git\n\ncreate ssh key\nAdd git@github.com:bthek1/.files.git\nsource ~/.bashrc\n\n\n\nbpytop\nsudo apt install software-properties-common\nsudo apt install bpytop",
+    "crumbs": [
+      "Raspberry PI Setup"
+    ]
+  },
+  {
+    "objectID": "raspberry_pi_5.html#program-gpio-pins",
+    "href": "raspberry_pi_5.html#program-gpio-pins",
+    "title": "Raspberry PI Setup",
+    "section": "Program GPIO Pins",
+    "text": "Program GPIO Pins\n\nThe Raspberry Pi 5’s GPIO pins allow for various types of hardware control and communication, enabling you to interface with LEDs, sensors, motors, displays, and more. The main GPIO protocols on the Pi include digital I/O, PWM, I2C, SPI, UART, and 1-Wire. Python makes it easy to work with these protocols, especially using libraries like RPi.GPIO, gpiozero, and spidev.\n\n\n\n1. Setting Up GPIO on Raspberry Pi\n\nRPi.GPIO: A popular library for low-level control of the GPIO pins. bash      sudo apt update      sudo apt install python3-rpi.gpio\ngpiozero: A higher-level, beginner-friendly library for common hardware components. bash      sudo apt install python3-gpiozero\n\n\n\n2. Configuring GPIO Pins\nGPIO pins can be configured as either input or output. RPi.GPIO uses two main numbering systems: - BCM (Broadcom): The GPIO pin numbers as per the Broadcom chip. - BOARD: Physical pin numbers on the board header.\n\n\n3. Basic Digital I/O (Input and Output)\n\nOutput Example (LED Blinking)\nimport RPi.GPIO as GPIO\nimport time\n\nGPIO.setmode(GPIO.BCM)\nGPIO.setup(17, GPIO.OUT)  # Use GPIO pin 17\n\ntry:\n    while True:\n        GPIO.output(17, GPIO.HIGH)  # Turn LED on\n        time.sleep(1)\n        GPIO.output(17, GPIO.LOW)   # Turn LED off\n        time.sleep(1)\nexcept KeyboardInterrupt:\n    pass\nfinally:\n    GPIO.cleanup()\n\n\nInput Example (Button)\nGPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Use GPIO 18 with a pull-up resistor\n\nwhile True:\n    if GPIO.input(18) == GPIO.LOW:  # Button pressed\n        print(\"Button Pressed!\")\n    time.sleep(0.1)\n\n\n\n4. Pulse Width Modulation (PWM)\nPWM is used to control things like LED brightness and motor speed by adjusting the duty cycle.\n\nPWM Example\nimport RPi.GPIO as GPIO\nimport time\n\nGPIO.setmode(GPIO.BCM)\nGPIO.setup(17, GPIO.OUT)\n\npwm = GPIO.PWM(17, 1000)  # Initialize PWM on pin 17 at 1 kHz frequency\npwm.start(0)              # Start with 0% duty cycle (off)\n\ntry:\n    for duty_cycle in range(0, 101, 5):\n        pwm.ChangeDutyCycle(duty_cycle)\n        time.sleep(0.1)\nfinally:\n    pwm.stop()\n    GPIO.cleanup()\n\n\n\n5. I2C Communication (Inter-Integrated Circuit)\nI2C is commonly used for sensors, displays, and EEPROMs. The Raspberry Pi 5’s default I2C pins are SDA1 (GPIO 2) and SCL1 (GPIO 3).\n\nEnable I2C and Install smbus Library\nsudo apt install -y i2c-tools python3-smbus\n\n\nScanning for I2C Devices\ni2cdetect -y 1\n\n\nI2C Example (Reading a Sensor)\nimport smbus\nimport time\n\nbus = smbus.SMBus(1)       # Use I2C bus 1\nDEVICE_ADDRESS = 0x48      # Replace with the I2C address of your device\nREGISTER = 0x00            # Register to read from\n\nwhile True:\n    data = bus.read_byte_data(DEVICE_ADDRESS, REGISTER)\n    print(\"Data:\", data)\n    time.sleep(1)\n\n\n\n6. SPI Communication (Serial Peripheral Interface)\nSPI is often used for displays, SD cards, and other high-speed peripherals. The default SPI pins on the Raspberry Pi 5 are MOSI (GPIO 10), MISO (GPIO 9), SCK (GPIO 11), and CE0 (GPIO 8).\n\nEnable SPI and Install spidev\nsudo apt install python3-spidev\n\n\nSPI Example\nimport spidev\nimport time\n\nspi = spidev.SpiDev()\nspi.open(0, 0)            # Open SPI bus 0, chip select 0\nspi.max_speed_hz = 50000  # Set the maximum speed\n\ntry:\n    while True:\n        resp = spi.xfer2([0xAA])  # Send data (0xAA is an example byte)\n        print(\"Response:\", resp)\n        time.sleep(1)\nfinally:\n    spi.close()\n\n\n\n7. UART Communication (Universal Asynchronous Receiver-Transmitter)\nUART is used for serial communication, such as GPS modules or serial displays. The default UART pins are TX (GPIO 14) and RX (GPIO 15).\n\nEnable UART and Install pyserial\nsudo apt install python3-serial\n\n\nUART Example\nimport serial\nimport time\n\nser = serial.Serial(\"/dev/serial0\", baudrate=9600, timeout=1)  # Open UART on /dev/serial0\n\ntry:\n    ser.write(b\"Hello from Raspberry Pi 5\\n\")  # Write data\n    while True:\n        if ser.in_waiting &gt; 0:\n            data = ser.readline().decode().strip()\n            print(\"Received:\", data)\nfinally:\n    ser.close()\n\n\n\n8. 1-Wire Communication\n1-Wire is often used for temperature sensors like the DS18B20. The default 1-Wire GPIO pin is GPIO 4.\n\nEnable 1-Wire\n\nOpen the configuration:\nsudo raspi-config\nGo to Interface Options &gt; 1-Wire and enable it. Reboot if prompted.\n\n\n\nRead 1-Wire Data (Example for DS18B20 Sensor)\n\nFind the sensor in /sys/bus/w1/devices/.\nRead the sensor data:\nimport os\nimport time\n\nsensor_path = '/sys/bus/w1/devices/28-XXXXXXXXXXXX/w1_slave'  # Replace with your sensor’s address\n\ndef read_temp():\n    with open(sensor_path, 'r') as f:\n        lines = f.readlines()\n    if \"YES\" in lines[0]:\n        temp_str = lines[1].split(\"t=\")[1]\n        temp_c = float(temp_str) / 1000.0\n        return temp_c\n\nwhile True:\n    temp = read_temp()\n    print(\"Temperature:\", temp, \"°C\")\n    time.sleep(1)\n\n\n\n\n9. Using the gpiozero Library for High-Level Control\ngpiozero offers an easier, high-level approach for beginners and comes with built-in support for LEDs, buttons, motors, and more.\n\nLED and Button with gpiozero\nfrom gpiozero import LED, Button\nfrom signal import pause\n\nled = LED(17)\nbutton = Button(18)\n\nbutton.when_pressed = led.on\nbutton.when_released = led.off\n\npause()  # Keep the program running\n\n\n\n10. Example: Combining Multiple Protocols\nThis example combines GPIO, PWM, and I2C to control an LED and read sensor data:\nfrom gpiozero import LED, PWMLED\nfrom smbus import SMBus\nimport time\n\n# Initialize an LED on GPIO 17 and an I2C sensor on address 0x48\nled = LED(17)\npwm_led = PWMLED(17)\nbus = SMBus(1)\nDEVICE_ADDRESS = 0x48\nREGISTER = 0x00\n\n# Toggle the LED and adjust PWM based on sensor data\ntry:\n    while True:\n        data = bus.read_byte_data(DEVICE_ADDRESS, REGISTER)\n        brightness = data / 255  # Scale to 0.0 - 1.0 for PWM\n        pwm_led.value = brightness\n        time.sleep(0.1)\nexcept KeyboardInterrupt:\n    pass\n\n\nSummary of Raspberry Pi 5 GPIO Communication Protocols\n\n\n\n\n\n\n\n\n\nProtocol\nPins\nLibraries\nCommon Devices\n\n\n\n\nDigital I/O\nAny GPIO\nRPi.GPIO, gpiozero\nButtons, LEDs, Relays\n\n\nPWM\nAny GPIO\nRPi.GPIO, gpiozero\nLEDs (dimming), motors\n\n\nI2C\nSDA (GPIO 2), SCL (GPIO 3)\nsmbus, gpiozero\nSensors, displays\n\n\nSPI\nMOSI (GPIO 10), MISO (GPIO 9), SCK (GPIO 11), CE0 (GPIO 8)\nspidev, gpiozero\nSD cards, displays\n\n\nUART\nTX (GPIO 14), RX (GPIO 15)\nserial, gpiozero\nGPS, serial displays\n\n\n1-Wire\nGPIO 4\nos, gpiozero\nDS18B20 temperature sensor\n\n\n\n\n\nTips for GPIO Programming\n\nUse Pull-up/Pull-down Resistors: Ensure stability with pull-up or pull-down resistors for inputs.\nError Handling: Use try...except to handle unexpected interruptions.\nCleanup: Always call GPIO.cleanup() to reset pins after running scripts with RPi.GPIO.\n\nThis guide covers the essentials of each protocol, providing a foundation for more advanced projects with the Raspberry Pi 5 and Python GPIO programming.",
+    "crumbs": [
+      "Raspberry PI Setup"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hardware_Tools",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "Hardware_Tools"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "Hardware_Tools",
+    "section": "Developer Guide",
+    "text": "Developer Guide\nIf you are new to using nbdev here are some useful pointers to get you started.\n\nInstall Hardware_Tools in Development mode\n# make sure Hardware_Tools package is installed in development mode\n$ pip install -e .\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to Hardware_Tools\n$ nbdev_prepare",
+    "crumbs": [
+      "Hardware_Tools"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "Hardware_Tools",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/bthek1/Hardware_Tools.git\nor from conda\n$ conda install -c bthek1 Hardware_Tools\nor from pypi\n$ pip install Hardware_Tools\n\n\nDocumentation\nDocumentation can be found hosted on this GitHub repository’s pages. Additionally you can find package manager specific guidelines on conda and pypi respectively.",
+    "crumbs": [
+      "Hardware_Tools"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "Hardware_Tools",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2",
+    "crumbs": [
+      "Hardware_Tools"
+    ]
+  },
+  {
+    "objectID": "computer_build.html",
+    "href": "computer_build.html",
+    "title": "Computer Build",
+    "section": "",
+    "text": "Part\nSpec\nAmount\nPower\n\n\n\n\n[x] Motherboard\nASUS Prime X670-P Wifi CSM AM5 ATX Motherboard\n$339.36\n30-50W\n\n\n[x] CPU\nAMD Ryzen 9 7900X 12 Core AM5 5.6GHz CPU Processor\n$599\n170W\n\n\n[ ] RAM\nKingston 64GB (2x32GB) KF560C36BBEAK2-64 Fury Beast RGB 6000MHz DDR5 RAM\n$309\n10W\n\n\n[ ] Memory\nCrucial T705 1TB CT1000T705SSD5 PCIe 5.0 2280 M.2 NVMe SSD - with Heatsink\n$289\n11.55W\n\n\n[ ] Memory\nSeagate Barracuda 1TB (2016)\n-\n\n\n\n[ ] Cooler\nThermalright Phantom Spirit 120 SE ARGB CPU Cooler - &gt;166mm\n$59\n\n\n\n[x] Case\nThermaltake View 200 TG ARGB Mid Tower ATX Case\n$78.78\n\n\n\n[x] GPU\nRTX3090\n350W\n\n\n\n[ ] PSU\nThermaltake Toughpower GF A3 Snow 1050W Power Supply\n$219\n\n\n\n[ ] Fans\n3x 120mm\n$35",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#parts",
+    "href": "computer_build.html#parts",
+    "title": "Computer Build",
+    "section": "",
+    "text": "Part\nSpec\nAmount\nPower\n\n\n\n\n[x] Motherboard\nASUS Prime X670-P Wifi CSM AM5 ATX Motherboard\n$339.36\n30-50W\n\n\n[x] CPU\nAMD Ryzen 9 7900X 12 Core AM5 5.6GHz CPU Processor\n$599\n170W\n\n\n[ ] RAM\nKingston 64GB (2x32GB) KF560C36BBEAK2-64 Fury Beast RGB 6000MHz DDR5 RAM\n$309\n10W\n\n\n[ ] Memory\nCrucial T705 1TB CT1000T705SSD5 PCIe 5.0 2280 M.2 NVMe SSD - with Heatsink\n$289\n11.55W\n\n\n[ ] Memory\nSeagate Barracuda 1TB (2016)\n-\n\n\n\n[ ] Cooler\nThermalright Phantom Spirit 120 SE ARGB CPU Cooler - &gt;166mm\n$59\n\n\n\n[x] Case\nThermaltake View 200 TG ARGB Mid Tower ATX Case\n$78.78\n\n\n\n[x] GPU\nRTX3090\n350W\n\n\n\n[ ] PSU\nThermaltake Toughpower GF A3 Snow 1050W Power Supply\n$219\n\n\n\n[ ] Fans\n3x 120mm\n$35",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#central-processing-unit-cpu",
+    "href": "computer_build.html#central-processing-unit-cpu",
+    "title": "Computer Build",
+    "section": "1. Central Processing Unit (CPU)",
+    "text": "1. Central Processing Unit (CPU)\n\nThe CPU is vital for data preprocessing, running ML algorithms, and managing overall system operations. For ML tasks, a CPU with high core count and strong multi-threading capabilities is essential.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nCPU\nAMD Ryzen 9 7950X\n16 cores / 32 threads, 4.5 GHz base, 5.7 GHz boost, AM5 socket\n~1,050\n\n\n\nAMD Ryzen 9 7900X\n12 cores / 24 threads, 4.7 GHz base, 5.6 GHz boost, AM5 socket\n~750\n\n\n\nAMD Ryzen 7 7700X\n8 cores / 16 threads, 4.5 GHz base, 5.4 GHz boost, AM5 socket\n~525\n\n\n\nRecommendation:\nThe AMD Ryzen 9 7950X is highly recommended for ML development due to its high core and thread count, which enhances parallel processing capabilities essential for handling complex ML tasks and large datasets.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#graphics-processing-unit-gpu",
+    "href": "computer_build.html#graphics-processing-unit-gpu",
+    "title": "Computer Build",
+    "section": "2. Graphics Processing Unit (GPU)",
+    "text": "2. Graphics Processing Unit (GPU)\n\nGPUs are the backbone of modern ML workloads, especially for deep learning tasks. NVIDIA GPUs are typically preferred due to their CUDA cores and extensive support in ML frameworks.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nGPU\nNVIDIA GeForce RTX 4090\n24 GB GDDR6X, 16,384 CUDA cores, PCIe 4.0, excellent for large-scale ML models\n~2,400\n\n\n\nNVIDIA GeForce RTX 4080\n16 GB GDDR6X, 9,728 CUDA cores, PCIe 4.0, great performance for ML\n~1,800\n\n\n\nNVIDIA RTX A6000\n48 GB GDDR6, 10,752 CUDA cores, ECC memory, optimized for professional ML workloads\n~6,750\n\n\n\nNVIDIA GeForce RTX 4070 Ti\n12 GB GDDR6X, 7,680 CUDA cores, PCIe 4.0, balanced performance and cost\n~1,200\n\n\n\nRecommendation:\nFor the best ML performance, the NVIDIA GeForce RTX 4090 is ideal due to its superior CUDA core count and large VRAM, enabling efficient training of complex models. If budget constraints exist, the RTX 4080 or RTX 4070 Ti offer excellent performance at a more accessible price.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#motherboard",
+    "href": "computer_build.html#motherboard",
+    "title": "Computer Build",
+    "section": "3. Motherboard",
+    "text": "3. Motherboard\n\nA compatible motherboard ensures seamless integration of all components, supports multiple GPUs, offers ample RAM slots, and provides reliable power delivery.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nMotherboard\nASUS PRIME X670-P WIFI\nAM5 socket, 1 x PCIe 4.0 x16 slots 1 x PCIe 4.0 x8, DDR5 support, WiFi 6E, robust VRMs\n~219.99\n\n\n\nMSI MPG X670E Carbon WiFi\nAM5 socket, Triple PCIe 5.0 x16 slots, DDR5, WiFi 6E, high-quality VRMs\n~675\n\n\n\nGigabyte X670E AORUS Elite\nAM5 socket, Triple PCIe 5.0 x16 slots, DDR5, advanced thermal design\n~600\n\n\n\nASRock X670E Taichi\nAM5 socket, Triple PCIe 5.0 x16 slots, DDR5, premium build quality\n~900\n\n\n\nASUS TUF Gaming X670E-Plus\nAM5 socket, 1 x PCIe 5.0 x16 slots, 1 x PCIe 4.0 x4, DDR5, military-grade components\n~749\n\n\n\nASUS ProArt X670E-Creatort\nAM5 socket, 2 x PCIe 5.0 x16 slots, 1 x PCIe 4.0 x2, DDR5\n~768\n\n\n\nASUS ROG Strix X670E Gaming\nAM5 socker, 1 x PCIe 5.0 x16 slots, 1 x PCIe 4.0 x4, DDR5\n~639\n\n\n\nRecommendation:\nThe ASUS PRIME X670-P WIFI offers a balanced mix of features, including dual PCIe 5.0 x16 slots suitable for dual GPU setups, robust power delivery, and DDR5 memory support, making it an excellent choice for ML development.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#memory-ram",
+    "href": "computer_build.html#memory-ram",
+    "title": "Computer Build",
+    "section": "4. Memory (RAM)",
+    "text": "4. Memory (RAM)\n\nAmple and fast RAM is crucial for handling large datasets and ensuring smooth multitasking during model training and evaluation.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nRAM\nG.Skill Trident Z5 RGB DDR5 64GB (2x32GB) 6000MHz\nHigh-speed DDR5, RGB aesthetics, low latency\n~450\n\n\n\nCorsair Vengeance DDR5 32GB (2x16GB) 6000MHz\nReliable performance, high speed\n~225\n\n\n\nKingston Fury Beast DDR5 128GB (4x32GB) 6000MHz\nMassive capacity for extensive datasets\n~900\n\n\n\nCrucial Ballistix DDR5 32GB (2x16GB) 5600MHz\nBudget-friendly, decent performance\n~195\n\n\n\nRecommendation:\nFor most ML applications, 64 GB DDR5 RAM (e.g., G.Skill Trident Z5 RGB DDR5 64GB) strikes a good balance between capacity and speed. However, for very large datasets or complex models, opting for 128 GB DDR5 RAM (e.g., Kingston Fury Beast DDR5 128GB) is advisable.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#storage",
+    "href": "computer_build.html#storage",
+    "title": "Computer Build",
+    "section": "5. Storage",
+    "text": "5. Storage\n\nFast and ample storage ensures quick data access, efficient model saving/loading, and smooth system performance.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nPrimary Storage\nSamsung 980 PRO 1TB NVMe SSD\nPCIe 4.0, high read/write speeds, reliable\n~150\n\n\nSecondary Storage\nWD Black SN850X 2TB NVMe SSD\nPCIe 4.0, larger capacity for datasets\n~300\n\n\n\nSamsung 990 PRO 2TB NVMe SSD\nLatest generation, PCIe 4.0, extremely fast\n~375\n\n\n\nCrucial P5 Plus 4TB NVMe SSD\nPCIe 4.0, massive storage for extensive datasets\n~675\n\n\n\nSeagate FireCuda 530 1TB NVMe SSD\nPCIe 4.0, excellent endurance and reliability\n~180\n\n\n\nCorsair MP600 Pro XT 2TB NVMe SSD\nPCIe 4.0, robust thermal management\n~330\n\n\n\nRecommendation:\nA combination of a 1 TB NVMe SSD for the operating system and frequently accessed data (e.g., Samsung 980 PRO 1TB) and a 2 TB NVMe SSD for larger datasets and model storage (e.g., WD Black SN850X 2TB) is ideal. For maximum storage needs, consider adding a 4 TB NVMe SSD.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#power-supply-unit-psu",
+    "href": "computer_build.html#power-supply-unit-psu",
+    "title": "Computer Build",
+    "section": "6. Power Supply Unit (PSU)",
+    "text": "6. Power Supply Unit (PSU)\n\nA reliable PSU ensures stable power delivery to all components, especially when running multiple GPUs.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nPSU\nEVGA SuperNOVA 1200 G6 1200W\n80+ Gold, fully modular, high wattage for dual GPUs\n~450\n\n\n\nCorsair RM1000x 1000W 80+ Gold\nFully modular, reliable performance\n~270\n\n\n\nSeasonic Focus GX-850 850W\n80+ Gold, fully modular\n~195\n\n\n\nBe Quiet! Straight Power 11 1000W\n80+ Platinum, fully modular\n~300\n\n\n\nCorsair HX1200i 1200W\n80+ Platinum, high efficiency\n~450\n\n\n\nRecommendation:\nFor dual GPU configurations, a 1200W PSU like the EVGA SuperNOVA 1200 G6 or Corsair HX1200i is recommended to ensure ample power headroom and stability, especially under heavy loads.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#cooling-solutions",
+    "href": "computer_build.html#cooling-solutions",
+    "title": "Computer Build",
+    "section": "7. Cooling Solutions",
+    "text": "7. Cooling Solutions\n\nEffective cooling is essential to maintain optimal performance and prolong the lifespan of your components, particularly the CPU and GPUs.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nCPU Cooler\nCorsair iCUE H150i Elite Capellix\n360mm AIO, RGB lighting, high-performance cooling\n~300\n\n\n\nNoctua NH-D15 chromax.Black\nDual tower air cooler, extremely efficient and quiet\n~150\n\n\n\nbe quiet! Dark Rock Pro 4\nHigh-performance air cooling, near-silent operation\n~135\n\n\n\nNZXT Kraken Z73 RGB\n360mm AIO, customizable LCD display, premium cooling\n~375\n\n\n\nArctic Liquid Freezer II 360\n360mm AIO, excellent cooling performance\n~225\n\n\n\nRecommendation:\nFor optimal CPU cooling, consider a high-performance AIO liquid cooler like the Corsair iCUE H150i Elite Capellix or a top-tier air cooler like the Noctua NH-D15 chromax.Black. These options ensure your CPU remains cool during intensive ML tasks.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#computer-case-chassis",
+    "href": "computer_build.html#computer-case-chassis",
+    "title": "Computer Build",
+    "section": "8. Computer Case (Chassis)",
+    "text": "8. Computer Case (Chassis)\n\nA spacious and well-ventilated case ensures that all components, especially multiple GPUs, have adequate airflow and space.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nCase\nFractal Design Meshify 2\nATX, excellent airflow, spacious interior\n~225\n\n\n\nThermaltake Core P8\nATX, open-frame design, maximum airflow\n~300\n\n\n\nNZXT H710\nATX, sleek design, good cable management\n~240\n\n\n\nLian Li PC-O11 Dynamic\nATX, stylish with excellent cooling and showcase features\n~225\n\n\n\nPhanteks Eclipse P600S\nATX, hybrid cooling support, sound-dampening\n~300\n\n\n\nCorsair Obsidian Series 750D\nATX, large and versatile, robust build quality\n~255\n\n\n\nRecommendation:\nFor dual GPU setups, the Fractal Design Meshify 2 or Thermaltake Core P8 are excellent choices due to their spacious interiors and superior cooling support, ensuring that multiple GPUs can operate efficiently without overheating.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#operating-system",
+    "href": "computer_build.html#operating-system",
+    "title": "Computer Build",
+    "section": "9. Operating System",
+    "text": "9. Operating System\n\nChoose an OS that best supports your ML tools and frameworks. Ubuntu is widely used in ML environments due to its compatibility and support for NVIDIA drivers and ML frameworks.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nOperating System\nUbuntu 22.04 LTS\nFree, widely supported in ML environments\n0\n\n\n\nWindows 11 Pro\nComprehensive support for various ML tools\n~210\n\n\n\nRecommendation:\nUbuntu 22.04 LTS is highly recommended for ML development due to its robust support for NVIDIA drivers, compatibility with popular ML frameworks like TensorFlow and PyTorch, and extensive community support.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#networking-optional",
+    "href": "computer_build.html#networking-optional",
+    "title": "Computer Build",
+    "section": "10. Networking (Optional)",
+    "text": "10. Networking (Optional)\n\nFor distributed ML workloads or high-speed data transfers, high-speed networking can be beneficial.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nNetwork Card\nIntel X550-T2 10GbE\nDual 10 Gigabit Ethernet ports, PCIe 3.0\n~450\n\n\n\nASUS XG-C100C 10Gb Ethernet\nPCIe 3.0, reliable performance\n~225\n\n\n\nRecommendation:\nIf your ML workflows involve significant data transfers over the network, consider adding a 10Gb Ethernet Card like the Intel X550-T2 for high-speed connectivity.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#peripherals-optional",
+    "href": "computer_build.html#peripherals-optional",
+    "title": "Computer Build",
+    "section": "11. Peripherals (Optional)",
+    "text": "11. Peripherals (Optional)\n\nQuality peripherals can enhance your workflow and overall user experience.\n\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nKey Features\nPrice Range (AUD)\n\n\n\n\nMonitor\nDell UltraSharp U2720Q\n27-inch 4K, IPS panel, excellent color accuracy\n~900\n\n\n\nLG 27GN950-B\n27-inch 4K, IPS, high refresh rate\n~1,200\n\n\nKeyboard\nLogitech MX Keys\nErgonomic, wireless, backlit\n~150\n\n\n\nCorsair K95 RGB Platinum\nMechanical, RGB lighting, programmable keys\n~300\n\n\nMouse\nLogitech MX Master 3\nErgonomic, wireless, multiple programmable buttons\n~150\n\n\n\nRazer DeathAdder V2\nHigh-precision sensor, ergonomic design\n~105\n\n\nExternal Storage\nSamsung T7 Portable SSD 2TB\nFast USB 3.2 connectivity, portable\n~375\n\n\n\nWD My Passport 4TB\nLarge capacity, reliable performance\n~180\n\n\nUninterruptible Power Supply (UPS)\nAPC Back-UPS Pro 1500VA\nReliable backup power, surge protection\n~375\n\n\n\nCyberPower CP1500PFCLCD\nPure sine wave, LCD display, high capacity\n~300\n\n\n\nRecommendation:\nInvesting in high-quality monitors like the Dell UltraSharp U2720Q and ergonomic peripherals like the Logitech MX Keys and MX Master 3 can significantly enhance your productivity and comfort during long ML development sessions.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#complete-component-list-for-an-amd-based-ml-development-pc",
+    "href": "computer_build.html#complete-component-list-for-an-amd-based-ml-development-pc",
+    "title": "Computer Build",
+    "section": "Complete Component List for an AMD-Based ML Development PC",
+    "text": "Complete Component List for an AMD-Based ML Development PC\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nPrice (AUD)\n\n\n\n\nMotherboard\nASUS PRIME X670-P WIFI CSM DDR5 AM5 ATX\n450\n\n\nCPU\nAMD Ryzen 9 7900X\n750\n\n\nGPU\nNVIDIA GeForce RTX 4090\n2,400\n\n\nRAM\nG.Skill Trident Z5 RGB DDR5 64GB (2x32GB) 6000MHz\n450\n\n\nPrimary Storage\nSamsung 980 PRO 1TB NVMe SSD\n150\n\n\nSecondary Storage\nWD Black SN850X 2TB NVMe SSD\n300\n\n\nCPU Cooler\nCorsair iCUE H150i Elite Capellix (AIO Liquid Cooler)\n300\n\n\nPower Supply\nEVGA SuperNOVA 1200 G6 1200W, 80+ Gold Fully Modular\n450\n\n\nCase\nFractal Design Meshify 2\n225\n\n\n\n\n450 + 1050 + 2400 + 450 + 150 + 300 + 300 + 450 + 225 - 2400\n\n3375",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#additional-tips-for-building-an-ml-development-pc",
+    "href": "computer_build.html#additional-tips-for-building-an-ml-development-pc",
+    "title": "Computer Build",
+    "section": "Additional Tips for Building an ML Development PC",
+    "text": "Additional Tips for Building an ML Development PC\n\nEnsure Compatibility: Double-check that all components are compatible with each other, especially the motherboard, CPU, and RAM. Use tools like PCPartPicker to verify compatibility and prevent issues during assembly.\nPrioritize Cooling: ML workloads generate significant heat, especially with dual GPUs. Invest in high-quality cooling solutions to maintain system stability and prolong component lifespan.\nCable Management: A well-organized build not only looks clean but also promotes better airflow. Use modular PSUs and manage cables efficiently within the case.\nFuture-Proofing: Select components that offer room for upgrades, such as additional RAM slots, PCIe lanes, and storage options, to accommodate growing ML demands.\nDriver and Software Setup: After assembling your workstation, ensure that you install the latest drivers for your GPU (NVIDIA) and set up ML frameworks like TensorFlow, PyTorch, and others with GPU support.\nBackup Solutions: Implement regular backup strategies to protect your datasets and models. Consider using both local (external SSDs) and cloud-based backup solutions.\nMonitor Cooling and Performance: Use software tools to monitor system temperatures and performance metrics to ensure that your ML tasks are running efficiently without thermal throttling.",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "computer_build.html#computer-setup",
+    "href": "computer_build.html#computer-setup",
+    "title": "Computer Build",
+    "section": "Computer Setup",
+    "text": "Computer Setup\n\nproxmox server\n\nUbuntu\nWindows\nNAS",
+    "crumbs": [
+      "Computer Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html",
+    "href": "drone_build.html",
+    "title": "Drone Build",
+    "section": "",
+    "text": "Frame Size: Choose based on your requirements (racing, freestyle, camera drone). Common sizes are 150mm (micro), 250mm (freestyle/racing), 450mm (camera/freestyle).\nMaterial: Carbon fiber is lightweight and durable. Avoid plastic unless for toy drones.\nMounting: Ensure the frame supports the components you’re planning to use (motor mounting pattern, flight controller size, etc.).",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#quadcopter-frame",
+    "href": "drone_build.html#quadcopter-frame",
+    "title": "Drone Build",
+    "section": "",
+    "text": "Frame Size: Choose based on your requirements (racing, freestyle, camera drone). Common sizes are 150mm (micro), 250mm (freestyle/racing), 450mm (camera/freestyle).\nMaterial: Carbon fiber is lightweight and durable. Avoid plastic unless for toy drones.\nMounting: Ensure the frame supports the components you’re planning to use (motor mounting pattern, flight controller size, etc.).",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#motors",
+    "href": "drone_build.html#motors",
+    "title": "Drone Build",
+    "section": "2. Motors",
+    "text": "2. Motors\n\nMotor Size: Defined by numbers (e.g., 2205). First two digits refer to the stator diameter; the second two are stator height.\nKV Rating: Determines motor speed. Higher KV = faster motor, but less torque. Choose based on propeller size and battery.\nType: Brushless motors are most common due to efficiency and durability.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#electronic-speed-controllers-esc",
+    "href": "drone_build.html#electronic-speed-controllers-esc",
+    "title": "Drone Build",
+    "section": "3. Electronic Speed Controllers (ESC)",
+    "text": "3. Electronic Speed Controllers (ESC)\n\nAmperage Rating: Choose ESCs that support the motor’s current draw (check motor datasheets). Add a 20-30% safety margin.\nNumber of ESCs: 4 individual ESCs or a 4-in-1 ESC board. 4-in-1 simplifies wiring but may be harder to replace individually.\nFirmware: BLHeli_S or BLHeli_32 are common for advanced features and performance",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#flight-controller-fc",
+    "href": "drone_build.html#flight-controller-fc",
+    "title": "Drone Build",
+    "section": "4. Flight Controller (FC)",
+    "text": "4. Flight Controller (FC)\n\nProcessor: F7 or F4 processors are common. F7 provides more future-proofing and features.\nGyros: Look for FCs with high-performance gyros for smoother flight. MPU6000 is reliable for most builds.\nUART Ports: Ensure enough ports for your accessories like GPS, telemetry, and receiver.\nFirmware: Betaflight or iNav for FPV racing/freestyle, or ArduPilot for more advanced features.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#propellers",
+    "href": "drone_build.html#propellers",
+    "title": "Drone Build",
+    "section": "5. Propellers",
+    "text": "5. Propellers\n\nSize: Propeller size should match the motor and frame size. Common sizes are 5-inch for freestyle and racing, 6-8 inch for medium, and larger for camera drones.\nPitch: A higher pitch increases speed but reduces flight time. Choose based on your flying style.\nMaterial: Nylon with glass fiber is durable and affordable.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#battery-lipo",
+    "href": "drone_build.html#battery-lipo",
+    "title": "Drone Build",
+    "section": "6. Battery (LiPo)",
+    "text": "6. Battery (LiPo)\n\nCell Count: Defined as 3S, 4S, etc. More cells mean higher voltage (3S = 11.1V, 4S = 14.8V).\nCapacity (mAh): Larger capacity gives longer flight time but increases weight. Balance capacity with weight for your drone size.\nC Rating: Defines discharge rate. Higher C rating = more current output. Choose at least 30C-50C for racing drones.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#radio-transmitter-receiver",
+    "href": "drone_build.html#radio-transmitter-receiver",
+    "title": "Drone Build",
+    "section": "7. Radio Transmitter & Receiver",
+    "text": "7. Radio Transmitter & Receiver\n\nChannels: At least 6-8 channels are recommended for basic drone control.\nRange: Choose a transmitter with sufficient range (consider 2.4GHz or long-range 915MHz systems for FPV).\nReceiver Type: FrSky, FlySky, Spektrum, or Crossfire depending on your preferred brand and features.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#fpv-camera-video-transmitter-vtx",
+    "href": "drone_build.html#fpv-camera-video-transmitter-vtx",
+    "title": "Drone Build",
+    "section": "8. FPV Camera & Video Transmitter (VTX)",
+    "text": "8. FPV Camera & Video Transmitter (VTX)\n\nFPV Camera: Look for low-latency cameras with high-resolution (600TVL to 1200TVL) for a clear FPV feed.\nVideo Transmitter (VTX): Choose based on the required range (25mW for short-range, 200-600mW for longer ranges).\nVTX Band: Make sure your VTX operates on legal frequencies in your country (typically 5.8GHz).",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#gps-module-optional",
+    "href": "drone_build.html#gps-module-optional",
+    "title": "Drone Build",
+    "section": "9. GPS Module (optional)",
+    "text": "9. GPS Module (optional)\n\nPurpose: Adds features like Return-to-Home (RTH) and position hold. Essential for camera drones and advanced features.\nCompatibility: Ensure it’s compatible with your flight controller firmware.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#power-distribution-board-pdb",
+    "href": "drone_build.html#power-distribution-board-pdb",
+    "title": "Drone Build",
+    "section": "10. Power Distribution Board (PDB)",
+    "text": "10. Power Distribution Board (PDB)\n\nCurrent Rating: Ensure it supports the combined current draw of all your components.\nBuilt-in Features: Some PDBs come with built-in voltage regulators or OSD (On-Screen Display) for telemetry.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "drone_build.html#miscellaneous-parts",
+    "href": "drone_build.html#miscellaneous-parts",
+    "title": "Drone Build",
+    "section": "11. Miscellaneous Parts",
+    "text": "11. Miscellaneous Parts\n\nLEDs: For night flying or visibility.\nBuzzer: Helps locate the drone in case of a crash.\nXT60 Connectors: Common connectors for LiPo batteries.\n\n\nRecommended Parts Table\n\n\n\n\n\n\n\n\n\nComponent\nRecommendation\nDescription\nPrice Range\n\n\n\n\nFrame\nTBS Source One 5-inch Frame\n5-inch freestyle frame, sturdy, affordable\n$30 - $50\n\n\nMotors\nEmax Eco II 2207 1700KV\nBudget-friendly motors, great for 5-inch props on 6S batteries\n$50 - $70 (set)\n\n\nESC\nHobbywing Xrotor 45A 4-in-1 ESC\nHigh-quality, reliable 4-in-1 ESC\n$50 - $70\n\n\nFlight Controller\nMamba F405 MK2 Flight Controller\nReliable FC with F405 processor, great for Betaflight builds\n$35 - $50\n\n\nPropellers\nHQ Prop 5x4.3x3 V1S\n5-inch prop with great durability and flight performance\n$3 - $6 (set)\n\n\nBattery\nTattu 1300mAh 4S 75C LiPo\nPopular LiPo battery for freestyle drones\n$25 - $40\n\n\nTransmitter\nFrSky Taranis QX7\nReliable transmitter, supports OpenTX for custom setups\n$120 - $150\n\n\nReceiver\nFrSky R-XSR Receiver\nCompact receiver with good range and telemetry\n$20 - $30\n\n\nFPV Camera\nRuncam Phoenix 2\nLow-latency camera with excellent image quality\n$30 - $40\n\n\nVTX\nTBS Unify Pro 5G8 HV\nTrusted, powerful VTX with multiple power output options\n$40 - $60\n\n\nGPS Module\nBeitian BN-220 GPS\nCompact and reliable GPS module\n$15 - $25\n\n\nPower Distribution Board\nMatek PDB XT60\nPDB with built-in 5V/12V BEC for powering peripherals\n$10 - $15\n\n\nBuzzer\nViFly Finder 2\nSelf-powered buzzer with locator function\n$15 - $20\n\n\n\n\nThis guide gives an overview of the essential components needed to build a quadcopter, along with recommendations that balance performance and budget.",
+    "crumbs": [
+      "Drone Build"
+    ]
+  },
+  {
+    "objectID": "pico.html",
+    "href": "pico.html",
+    "title": "Pico",
+    "section": "",
+    "text": "Download MicroPython UF2: Get the UF2 file from the official MicroPython site.\nFlash the Pico:\n\nHold down the BOOTSEL button on the Pico and connect it to your computer via USB.\nRelease the button once it appears as a storage device.\nDrag the MicroPython UF2 file to the Pico drive. It will reboot with MicroPython installed.\n\n\n\n\n\n\nInstall Thonny: It’s a lightweight IDE for Python and MicroPython.\nConfigure Thonny:\n\nOpen Thonny and go to Tools &gt; Options &gt; Interpreter.\nSelect MicroPython (Raspberry Pi Pico) as the interpreter and choose the correct USB port.\n\nYou can now write code in Thonny and run it directly on the Pico.\n\n\n\n\n\nThe machine module provides access to the hardware components of the Pico, such as GPIO, PWM, ADC, I2C, and SPI.\n\n\n\n\n\n\nTo control an LED connected to GPIO pin 15:\nfrom machine import Pin\nfrom time import sleep\n\n# Configure pin 15 as an output\nled = Pin(15, Pin.OUT)\n\n# Blink the LED\nwhile True:\n    led.toggle()  # Toggle the LED state\n    sleep(1)      # Wait 1 second\n\n\n\nTo read a button state connected to GPIO pin 14 with a pull-up resistor:\nfrom machine import Pin\nfrom time import sleep\n\nbutton = Pin(14, Pin.IN, Pin.PULL_UP)  # Button on pin 14, using internal pull-up\n\nwhile True:\n    if button.value() == 0:  # Button pressed (active low)\n        print(\"Button Pressed!\")\n    sleep(0.1)\n\n\n\n\nTo control LED brightness with PWM on GPIO pin 15:\nfrom machine import Pin, PWM\nfrom time import sleep\n\nled = PWM(Pin(15))  # Initialize PWM on pin 15\nled.freq(1000)      # Set frequency to 1000 Hz\n\n# Increase and decrease brightness\nwhile True:\n    for duty in range(0, 65536, 512):  # Gradually increase brightness\n        led.duty_u16(duty)            # Set duty cycle\n        sleep(0.01)\n    for duty in range(65535, 0, -512):  # Gradually decrease brightness\n        led.duty_u16(duty)\n        sleep(0.01)\n\n\n\nThe Pico has three analog input pins: ADC0 (GP26), ADC1 (GP27), and ADC2 (GP28).\n\n\nTo read data from a potentiometer connected to ADC0 (pin GP26):\nfrom machine import ADC\nfrom time import sleep\n\npot = ADC(26)  # Connect potentiometer to GP26\n\nwhile True:\n    value = pot.read_u16()          # Read 16-bit analog value\n    voltage = value * (3.3 / 65535) # Convert to voltage (3.3V reference)\n    print(\"ADC Value:\", value, \"Voltage:\", voltage)\n    sleep(1)\n\n\n\n\nThe Raspberry Pi Pico supports I2C, allowing communication with various devices like displays and sensors.\n\n\nTo scan for I2C devices connected to I2C0 (default pins SDA: GP4, SCL: GP5):\nfrom machine import Pin, I2C\n\ni2c = I2C(0, scl=Pin(5), sda=Pin(4), freq=400000)  # Set up I2C on GP4, GP5\ndevices = i2c.scan()  # Scan for connected I2C devices\nprint(\"I2C devices found:\", devices)\n\n\n\n\nSPI is commonly used to communicate with SD cards, sensors, and displays.\n\n\nTo set up an SPI connection on SPI0 (SCK: GP2, MOSI: GP3, MISO: GP4):\nfrom machine import Pin, SPI\n\nspi = SPI(0, baudrate=1000000, polarity=0, phase=0, sck=Pin(2), mosi=Pin(3), miso=Pin(4))\n\n# To read and write data, use spi.read() and spi.write() functions.\n\n\n\n\nTimers are useful for scheduling periodic tasks.\nfrom machine import Timer\n\ndef blink(timer):\n    led.toggle()  # Toggle the LED every second\n\nled = Pin(15, Pin.OUT)\ntimer = Timer()\ntimer.init(freq=1, mode=Timer.PERIODIC, callback=blink)  # Call blink() every second\n\n\n\nThe Pico has two UART peripherals, allowing serial communication with other devices.\n\n\nSet up UART0 (TX: GP0, RX: GP1):\nfrom machine import UART\n\nuart = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))\n\n# Write data\nuart.write(\"Hello from Pico!\")\n\n# Read data\nif uart.any():  # Check if data is available\n    data = uart.read()\n    print(\"Received:\", data)\n\n\n\n\nThis example reads the temperature using an analog temperature sensor and dims an LED based on the temperature reading.\nfrom machine import Pin, PWM, ADC\nfrom time import sleep\n\nled = PWM(Pin(15))  # LED connected to GP15\nled.freq(1000)\ntemp_sensor = ADC(4)  # Internal temperature sensor (connected to ADC4)\n\nwhile True:\n    reading = temp_sensor.read_u16()      # Read temperature sensor value\n    temperature = 27 - (reading - 0.706) / 0.001721  # Convert to Celsius\n\n    # Map temperature to LED brightness (for example, scale 0-50 C to 0-65535 PWM duty)\n    brightness = int(min(temperature, 50) / 50 * 65535)\n    led.duty_u16(brightness)\n\n    print(\"Temperature:\", temperature, \"°C\", \"LED Brightness:\", brightness)\n    sleep(1)\n\n\n\nTo automatically run a script on boot, save it as main.py on the Pico’s filesystem:\n\nWrite the script in Thonny.\nGo to File &gt; Save as and save it as main.py on the MicroPython device.\nWhen the Pico is powered up, it will automatically execute main.py.\n\n\n\n\n\nError Handling: Use try and except blocks to catch errors and prevent crashes.\nGPIO Cleanup: Use .deinit() to reset pins when they are no longer needed.\n\nThis provides a solid foundation for working with the Raspberry Pi Pico and MicroPython, enabling you to create anything from simple GPIO controls to complex sensor interfaces and communication with other devices.",
+    "crumbs": [
+      "Pico"
+    ]
+  },
+  {
+    "objectID": "pico.html#pinout",
+    "href": "pico.html#pinout",
+    "title": "Pico",
+    "section": "",
+    "text": "Download MicroPython UF2: Get the UF2 file from the official MicroPython site.\nFlash the Pico:\n\nHold down the BOOTSEL button on the Pico and connect it to your computer via USB.\nRelease the button once it appears as a storage device.\nDrag the MicroPython UF2 file to the Pico drive. It will reboot with MicroPython installed.\n\n\n\n\n\n\nInstall Thonny: It’s a lightweight IDE for Python and MicroPython.\nConfigure Thonny:\n\nOpen Thonny and go to Tools &gt; Options &gt; Interpreter.\nSelect MicroPython (Raspberry Pi Pico) as the interpreter and choose the correct USB port.\n\nYou can now write code in Thonny and run it directly on the Pico.\n\n\n\n\n\nThe machine module provides access to the hardware components of the Pico, such as GPIO, PWM, ADC, I2C, and SPI.\n\n\n\n\n\n\nTo control an LED connected to GPIO pin 15:\nfrom machine import Pin\nfrom time import sleep\n\n# Configure pin 15 as an output\nled = Pin(15, Pin.OUT)\n\n# Blink the LED\nwhile True:\n    led.toggle()  # Toggle the LED state\n    sleep(1)      # Wait 1 second\n\n\n\nTo read a button state connected to GPIO pin 14 with a pull-up resistor:\nfrom machine import Pin\nfrom time import sleep\n\nbutton = Pin(14, Pin.IN, Pin.PULL_UP)  # Button on pin 14, using internal pull-up\n\nwhile True:\n    if button.value() == 0:  # Button pressed (active low)\n        print(\"Button Pressed!\")\n    sleep(0.1)\n\n\n\n\nTo control LED brightness with PWM on GPIO pin 15:\nfrom machine import Pin, PWM\nfrom time import sleep\n\nled = PWM(Pin(15))  # Initialize PWM on pin 15\nled.freq(1000)      # Set frequency to 1000 Hz\n\n# Increase and decrease brightness\nwhile True:\n    for duty in range(0, 65536, 512):  # Gradually increase brightness\n        led.duty_u16(duty)            # Set duty cycle\n        sleep(0.01)\n    for duty in range(65535, 0, -512):  # Gradually decrease brightness\n        led.duty_u16(duty)\n        sleep(0.01)\n\n\n\nThe Pico has three analog input pins: ADC0 (GP26), ADC1 (GP27), and ADC2 (GP28).\n\n\nTo read data from a potentiometer connected to ADC0 (pin GP26):\nfrom machine import ADC\nfrom time import sleep\n\npot = ADC(26)  # Connect potentiometer to GP26\n\nwhile True:\n    value = pot.read_u16()          # Read 16-bit analog value\n    voltage = value * (3.3 / 65535) # Convert to voltage (3.3V reference)\n    print(\"ADC Value:\", value, \"Voltage:\", voltage)\n    sleep(1)\n\n\n\n\nThe Raspberry Pi Pico supports I2C, allowing communication with various devices like displays and sensors.\n\n\nTo scan for I2C devices connected to I2C0 (default pins SDA: GP4, SCL: GP5):\nfrom machine import Pin, I2C\n\ni2c = I2C(0, scl=Pin(5), sda=Pin(4), freq=400000)  # Set up I2C on GP4, GP5\ndevices = i2c.scan()  # Scan for connected I2C devices\nprint(\"I2C devices found:\", devices)\n\n\n\n\nSPI is commonly used to communicate with SD cards, sensors, and displays.\n\n\nTo set up an SPI connection on SPI0 (SCK: GP2, MOSI: GP3, MISO: GP4):\nfrom machine import Pin, SPI\n\nspi = SPI(0, baudrate=1000000, polarity=0, phase=0, sck=Pin(2), mosi=Pin(3), miso=Pin(4))\n\n# To read and write data, use spi.read() and spi.write() functions.\n\n\n\n\nTimers are useful for scheduling periodic tasks.\nfrom machine import Timer\n\ndef blink(timer):\n    led.toggle()  # Toggle the LED every second\n\nled = Pin(15, Pin.OUT)\ntimer = Timer()\ntimer.init(freq=1, mode=Timer.PERIODIC, callback=blink)  # Call blink() every second\n\n\n\nThe Pico has two UART peripherals, allowing serial communication with other devices.\n\n\nSet up UART0 (TX: GP0, RX: GP1):\nfrom machine import UART\n\nuart = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))\n\n# Write data\nuart.write(\"Hello from Pico!\")\n\n# Read data\nif uart.any():  # Check if data is available\n    data = uart.read()\n    print(\"Received:\", data)\n\n\n\n\nThis example reads the temperature using an analog temperature sensor and dims an LED based on the temperature reading.\nfrom machine import Pin, PWM, ADC\nfrom time import sleep\n\nled = PWM(Pin(15))  # LED connected to GP15\nled.freq(1000)\ntemp_sensor = ADC(4)  # Internal temperature sensor (connected to ADC4)\n\nwhile True:\n    reading = temp_sensor.read_u16()      # Read temperature sensor value\n    temperature = 27 - (reading - 0.706) / 0.001721  # Convert to Celsius\n\n    # Map temperature to LED brightness (for example, scale 0-50 C to 0-65535 PWM duty)\n    brightness = int(min(temperature, 50) / 50 * 65535)\n    led.duty_u16(brightness)\n\n    print(\"Temperature:\", temperature, \"°C\", \"LED Brightness:\", brightness)\n    sleep(1)\n\n\n\nTo automatically run a script on boot, save it as main.py on the Pico’s filesystem:\n\nWrite the script in Thonny.\nGo to File &gt; Save as and save it as main.py on the MicroPython device.\nWhen the Pico is powered up, it will automatically execute main.py.\n\n\n\n\n\nError Handling: Use try and except blocks to catch errors and prevent crashes.\nGPIO Cleanup: Use .deinit() to reset pins when they are no longer needed.\n\nThis provides a solid foundation for working with the Raspberry Pi Pico and MicroPython, enabling you to create anything from simple GPIO controls to complex sensor interfaces and communication with other devices.",
+    "crumbs": [
+      "Pico"
+    ]
+  },
+  {
+    "objectID": "home_assistant.html",
+    "href": "home_assistant.html",
+    "title": "Home Assistant",
+    "section": "",
+    "text": "1. What is Home Assistant?\n\nOpen Source: Free and community-driven, with a large ecosystem of add-ons, custom integrations, and a vibrant user community.\nLocal Control: Designed to run entirely on your local network, enhancing privacy and reducing latency.\nAutomations and Integrations: Integrates with over 2,000 devices and services, from Philips Hue lights to Nest thermostats to MQTT sensors.\nCross-Platform: Compatible with Raspberry Pi, Docker, virtual machines, NAS devices, and even cloud-hosted platforms.\n\n\n\n2. Home Assistant Installation Options\n\nHome Assistant OS: The simplest and recommended option, an all-in-one system with the OS and Home Assistant pre-installed. Ideal for Raspberry Pi and other single-board computers.\nHome Assistant Supervised: Runs Home Assistant on top of Debian with add-ons and updates similar to Home Assistant OS. Requires more technical knowledge.\nHome Assistant Container: Runs Home Assistant as a Docker container, allowing you to manage only Home Assistant without the OS features.\nHome Assistant Core: A Python-based installation for advanced users, where you install only the Home Assistant application on an existing Python environment.\n\n\n\n3. User Interface\n\nDashboard (Lovelace UI): Fully customizable interface to control devices, view sensor data, and manage automations. Supports themes, cards, and custom widgets.\nSidebar: Quick access to the main features, such as Overview, Map, Logbook, History, and Configuration.\nCustom Dashboards: You can create multiple dashboards for different rooms or users and set up roles to limit access to certain dashboards.\n\n\n\n4. Integrations and Device Support\n\nOfficial Integrations: Over 2,000 built-in integrations for smart home devices, including Philips Hue, Nest, Amazon Alexa, Google Home, Sonos, and Zigbee.\nCustom Integrations: Community-made integrations are available, and you can add custom components using Home Assistant’s custom components directory.\nZigbee, Z-Wave, and MQTT:\n\nZigbee and Z-Wave: Requires USB dongles to control Zigbee or Z-Wave devices. Common choices include the ConBee II and Aeotec Z-Wave sticks.\nMQTT: A lightweight protocol for connecting IoT devices, supported by many devices and Home Assistant.\n\n\n\n\n5. Automation and Scripts\n\nAutomation: The core feature for setting up automated actions. Automations consist of triggers, conditions, and actions.\nScripts: Allow for more complex sequences of actions, reusable in multiple automations.\nBlueprints: Shared automation templates that simplify creating automations without needing to write code from scratch.\nYAML and Visual Editor: Home Assistant supports both YAML-based and visual automation editors. YAML is more flexible and is ideal for advanced automations.\n\n\nBasic Automation Example\nautomation:\n  - alias: Turn on lights at sunset\n    trigger:\n      - platform: sun\n        event: sunset\n    action:\n      - service: light.turn_on\n        entity_id: light.living_room\n\n\n\n6. Add-Ons and Extensions\n\nSupervisor Add-Ons: Extend Home Assistant’s functionality, similar to plugins. Examples include File Editor (for editing configuration files), Samba Share (for file access), Node-RED (for advanced automation), Mosquitto MQTT broker, ESPHome, and DuckDNS (for remote access).\nHACS (Home Assistant Community Store): An unofficial add-on that provides access to custom themes, integrations, and front-end components.\n\n\n\n7. Data Storage and Analysis\n\nDatabase: Home Assistant uses SQLite by default to store historical data, including sensor data, state changes, and logs.\nLong-Term Data Storage: For large data needs, you can configure Home Assistant to use an external database, such as MySQL or PostgreSQL.\nHistory and Logbook: Track device usage, automations, and state changes. Useful for debugging and understanding patterns in smart device use.\n\n\n\n8. Voice Assistant Integration\n\nAmazon Alexa and Google Assistant: Home Assistant integrates with both, allowing you to control devices via voice. Setting up may require some cloud services or linking your Home Assistant instance to your voice assistant account.\nHome Assistant Companion App: Provides voice commands, location tracking, and notifications on both iOS and Android.\nLocal Voice Control: With tools like Rhasspy and Almond, you can set up local, private voice control directly within Home Assistant.\n\n\n\n9. Security and Remote Access\n\nHTTPS with DuckDNS and Let’s Encrypt: DuckDNS add-on provides a free domain name and integrates with Let’s Encrypt to set up HTTPS encryption.\nNabu Casa: A paid service from Home Assistant that offers secure remote access without needing port forwarding, along with voice assistant integration and Alexa/Google Assistant linking.\nUser Accounts and Permissions: Multi-user support with different access levels, allowing limited or full access based on roles.\nTwo-Factor Authentication (2FA): Enhances security by requiring a second factor to access your Home Assistant instance.\n\n\n\n10. Energy Monitoring\n\nEnergy Dashboard: Introduced in 2021, it provides real-time and historical views of energy consumption and solar production, if applicable.\nEnergy Integrations: Home Assistant supports various smart energy meters and integrates with inverters and other devices to track energy consumption, production, and costs.\n\n\n\n11. Home Assistant Companion Apps\n\nAndroid and iOS Apps: Home Assistant’s mobile apps offer remote access, push notifications, and device tracking.\nDevice Tracking: The apps report device location, battery status, Wi-Fi, and more, which can be used for automations (e.g., turning on lights when you arrive home).\n\n\n\n12. Advanced Customization and Theming\n\nThemes: Customize the look of Home Assistant with custom themes, which can be installed via HACS or manually configured in YAML.\nCustom Cards: With HACS, you can add custom Lovelace cards for unique interfaces, like weather cards, gauge charts, and alarm panels.\nDeveloper Tools: Built-in developer tools help with testing automations, running services, and managing states.\n\n\n\n13. Examples of Common Automations\n\nLighting Control: Automate lights to turn on at sunset or based on motion sensors.\nClimate Control: Adjust thermostats based on room occupancy, time of day, or outdoor temperature.\nSecurity: Trigger cameras, alarms, or notifications based on door/window sensors or motion detectors.\nEnergy Management: Track energy use, receive notifications on high usage, or automate heavy loads to run during off-peak hours.\nPresence Detection: Control devices based on whether family members are home or away using phone tracking, Wi-Fi presence, or Bluetooth.\n\n\n\n14. Backup and Restore\n\nSnapshots: Home Assistant can create snapshots (backups) that save the current state of the system, add-ons, configurations, and data. These are useful for migrating to a new installation or restoring after a crash.\nAutomated Backups: You can set up automated snapshots and offload them to cloud storage, such as Google Drive, for additional redundancy.\n\n\n\n15. Getting Started with Home Assistant\n\nInstall Home Assistant OS on a Raspberry Pi or virtual machine.\nSet up a few key integrations like your lights, thermostat, and sensors.\nCreate simple automations using the visual editor.\nExplore Lovelace to customize your dashboard.\nInstall add-ons like HACS and Node-RED to enhance functionality.",
+    "crumbs": [
+      "Home Assistant"
+    ]
+  },
+  {
+    "objectID": "p_05_spec.html",
+    "href": "p_05_spec.html",
+    "title": "Spec",
+    "section": "",
+    "text": "Cpu - Amd\nRam - 32gb\nMemory - 1 TB\nBattery - long life\nScreen - high res/ OLED",
+    "crumbs": [
+      "Spec"
+    ]
+  },
+  {
+    "objectID": "p_05_spec.html#laptop---specs",
+    "href": "p_05_spec.html#laptop---specs",
+    "title": "Spec",
+    "section": "",
+    "text": "Cpu - Amd\nRam - 32gb\nMemory - 1 TB\nBattery - long life\nScreen - high res/ OLED",
+    "crumbs": [
+      "Spec"
+    ]
+  },
+  {
+    "objectID": "p_05_spec.html#monitors---specs",
+    "href": "p_05_spec.html#monitors---specs",
+    "title": "Spec",
+    "section": "Monitors - Specs",
+    "text": "Monitors - Specs\n\nRefresh rate - 144Hz\nResolution - 4K\nSize -\nHDR\nDisplay types - VA , IPS , OLED (best)\n\n\n\n\nSize\nResolution\n\n\n\n\n1080p - 1920x1080\n24 inchx\n\n\n1440p - 2560×1440\n27 inch\n\n\n4K - 4096×2160\n32 inch\n\n\n\nkogan is good",
+    "crumbs": [
+      "Spec"
+    ]
+  },
+  {
+    "objectID": "p_05_spec.html#cable-management",
+    "href": "p_05_spec.html#cable-management",
+    "title": "Spec",
+    "section": "Cable Management",
+    "text": "Cable Management\n\npower\n\nlaptop (easy access - left)\nmonitor (hidden - right)\n2 x Lights (usb) (right)\nFan (easy access - left)\nPhone charger (right)\n\n\n\nConnections\n\nMonitor -&gt; laptop (hdmi)",
+    "crumbs": [
+      "Spec"
+    ]
+  },
+  {
+    "objectID": "p_05_spec.html#home-network",
+    "href": "p_05_spec.html#home-network",
+    "title": "Spec",
+    "section": "Home Network",
+    "text": "Home Network\n\n192.168.1.1 - THEKKEL_MAIN\n192.168.1.2 - THEKKEL_MESH\nmove all the devices to mesh\nconnect mesh to modem\nhave black router as backup",
+    "crumbs": [
+      "Spec"
+    ]
+  },
+  {
+    "objectID": "rgb_lighting_build.html",
+    "href": "rgb_lighting_build.html",
+    "title": "RGB Lighting",
+    "section": "",
+    "text": "RGB smart LED strips, like the WS2818B and other models, are popular for customizable lighting projects. They offer flexibility, addressable LEDs, and dynamic lighting effects. Here’s what you should know about the types, features, and considerations when choosing RGB smart LED strips:\n\n1. Types of RGB Smart LED Strips\nThere are various types of RGB LED strips, often distinguished by the type of LED, chipset, and control methods:\n\nWS2812B/WS2813:\n\nEach LED is individually addressable, meaning each LED can be controlled independently for color and brightness.\nWS2813 is a newer version, which has backup data lines for redundancy; if one LED fails, the rest will still work.\n1 data line, which simplifies wiring.\n\nWS2818B:\n\nDual-signal redundancy: If one LED fails, others in the series will continue functioning.\nAddressable RGB LEDs with two data lines (Data and Backup Data).\nSupports longer continuous runs compared to single-line strips like WS2812B due to improved data integrity.\nIdeal for large, complex installations or places where reliability is essential.\n\nSK6812:\n\nSimilar to WS2812B but with better color accuracy.\nCan support RGBW (RGB + white), adding a true white LED for more precise lighting effects.\nCompatible with WS2812B controllers.\n\nAPA102 (DotStar):\n\nUses a separate clock and data line, enabling faster updates and smoother animations.\nBetter suited for high refresh-rate applications or when a faster response is needed.\n\n\n\n\n2. Voltage\n\n5V: Common in WS2812B and WS2813 strips. Requires a power supply with good regulation, as voltage drop can be an issue over long distances.\n12V: Common in WS2818B strips. Offers less voltage drop, making it better for longer runs without needing power injection.\n24V: Available in some variants. Ideal for very long strips with less voltage loss, meaning fewer power injections are required.\n\n\n\n3. Addressable vs Non-addressable Strips\n\nAddressable (e.g., WS2818B, WS2812B): Each LED can be controlled independently, allowing for more complex effects like color waves, animations, and patterns.\nNon-addressable (RGB): All LEDs show the same color and brightness at any given time.\n\n\n\n4. Number of LEDs per Meter\nLED strips are typically available in densities like 30 LEDs/m, 60 LEDs/m, 144 LEDs/m. Higher densities (more LEDs per meter): - Offer brighter and smoother lighting effects. - Are better for complex animations. - Consume more power.\n\n\n5. Power Consumption\n\nPower consumption depends on the number of LEDs and the type of strip. For instance:\n\nWS2812B strips typically consume around 18W per meter at full brightness for 60 LEDs/m.\nWS2818B with 60 LEDs/m might consume a similar amount, but the 12V version reduces the effects of voltage drop over longer strips.\n\nEnsure your power supply provides adequate power for the entire strip, and consider injecting power at multiple points for longer strips to prevent brightness dimming.\n\n\n\n6. Control Methods\n\nControllers: Addressable LED strips need a controller that can send the appropriate signals. Popular options include:\n\nArduino/ESP32/Raspberry Pi: For DIY projects.\nDedicated Controllers: Like the SP108E or SP110E, designed specifically for addressable LED strips.\n\nCommunication Protocols:\n\nWi-Fi/Bluetooth: Many smart LED strips come with Wi-Fi or Bluetooth control, allowing you to adjust lighting through apps.\nDMX: Used in professional lighting setups, enabling synchronized control across multiple strips.\n\n\n\n\n7. Compatibility with Software\nAddressable LED strips, like WS2818B and WS2812B, are compatible with various software and libraries, such as: - FastLED/Adafruit NeoPixel: Arduino libraries for controlling addressable RGB strips. - WLED: A highly popular, customizable firmware for controlling addressable LED strips with a web interface, mobile apps, and voice assistants like Alexa.\n\n\n8. Waterproofing\n\nIP20: No waterproofing, suitable for indoor, dry environments.\nIP65: Silicone coating, protects against dust and light splashes, good for indoor use in damp environments.\nIP67/IP68: Fully waterproof, can be submerged in water, ideal for outdoor applications.\n\n\n\n9. Durability and Longevity\n\nEnsure the strip you choose has good heat dissipation. Addressable LEDs like WS2818B can generate heat, especially at higher brightness levels, which might reduce their lifespan.\nAluminum profiles or channels can be used to house the LED strips for better cooling and aesthetic purposes.\n\n\n\n10. Use Cases\n\nHome decoration: Accent lighting, TV backlighting, and ambiance lighting.\nCommercial installations: Advertising displays, bar lighting, and retail ambiance.\nCreative projects: Custom lighting setups, cosplay, and art installations.\nOutdoor lighting: Gardens, pathways, or building outlines (with waterproof strips).\nAdvanced projects: Synchronize lighting with music, game setups, or AI-controlled smart home lighting.\n\n\n\nThings to Keep in Mind:\n\nPower Supply: Ensure the power supply matches the voltage and provides enough current for your strip.\nHeat Management: Addressable strips can get hot, so consider using aluminum channels for heat dissipation.\nDistance Limitation: For longer runs, you might need to inject power at multiple points to avoid voltage drop, especially with 5V strips.\nData Line Length: Data signal integrity can degrade over long distances. For strips like WS2818B with dual-signal redundancy, this is less of an issue.\n\nUnderstanding these factors will help you choose the right RGB smart LED strip for your project, ensuring you get the desired effects, performance, and longevity.",
+    "crumbs": [
+      "RGB Lighting"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html",
+    "href": "electrical_tools.html",
+    "title": "Tools",
+    "section": "",
+    "text": "Tool\nPurpose\nRecommendation\n\n\n\n\nMultimeter\nMeasures voltage, current, resistance, continuity.\nFluke 87V or Brymen BM235\n\n\nScrewdrivers (Insulated)\nFor working on electrical connections and devices.\nWiha Insulated Screwdriver Set\n\n\nPliers (Needle-nose, Lineman)\nFor cutting, twisting, and holding wires.\nKlein Tools Needle-nose Pliers\n\n\nWire Stripper\nStrips insulation from electrical wires.\nKlein Tools Wire Stripper/Cutter\n\n\nCable Cutter\nCuts through wires and cables.\nKnipex Cable Cutter\n\n\nCrimping Tool\nFor crimping connectors onto wires.\nIWISS Ratcheting Crimper\n\n\nElectrical Tape\nInsulates and secures electrical connections.\n3M Scotch Electrical Tape",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#basic-electrical-tools",
+    "href": "electrical_tools.html#basic-electrical-tools",
+    "title": "Tools",
+    "section": "",
+    "text": "Tool\nPurpose\nRecommendation\n\n\n\n\nMultimeter\nMeasures voltage, current, resistance, continuity.\nFluke 87V or Brymen BM235\n\n\nScrewdrivers (Insulated)\nFor working on electrical connections and devices.\nWiha Insulated Screwdriver Set\n\n\nPliers (Needle-nose, Lineman)\nFor cutting, twisting, and holding wires.\nKlein Tools Needle-nose Pliers\n\n\nWire Stripper\nStrips insulation from electrical wires.\nKlein Tools Wire Stripper/Cutter\n\n\nCable Cutter\nCuts through wires and cables.\nKnipex Cable Cutter\n\n\nCrimping Tool\nFor crimping connectors onto wires.\nIWISS Ratcheting Crimper\n\n\nElectrical Tape\nInsulates and secures electrical connections.\n3M Scotch Electrical Tape",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#measurement-and-testing-tools",
+    "href": "electrical_tools.html#measurement-and-testing-tools",
+    "title": "Tools",
+    "section": "2. Measurement and Testing Tools",
+    "text": "2. Measurement and Testing Tools\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nClamp Meter\nMeasures AC/DC current without breaking the circuit.\nFluke 376 FC or Uni-T UT210E\n\n\nOscilloscope\nVisualizes voltage signals and waveforms over time.\nRigol DS1054Z or Siglent SDS1202X-E\n\n\nFunction Generator\nGenerates electrical waveforms for testing circuits.\nSiglent SDG1032X\n\n\nLCR Meter\nMeasures inductance, capacitance, and resistance.\nDER EE DE-5000\n\n\nPower Supply (DC)\nProvides regulated DC voltage for circuits.\nRigol DP832 or Korad KD3005P\n\n\nInsulation Tester\nTests insulation resistance in electrical components and systems.\nFluke 1507\n\n\nThermal Camera\nDetects heat emissions for identifying faults in components.\nFlir TG165\n\n\nLogic Analyzer\nAnalyzes digital signals for testing digital circuits.\nSaleae Logic 8\n\n\n\n\nBest Instruments for Electrical Engineers\n\n\n\n\n\n\n\n\n\n\nCategory\nModel\nKey Features\nPrice (AUD)\nWhy It’s Recommended\n\n\n\n\nMultimeter\nFluke 87V\n- True RMS, 20,000 count display, temperature measurement, accurate voltage & current reading. - CAT III (1000V) & CAT IV (600V) safety rating.\n~650\nHigh accuracy and reliability, suitable for both industrial and lab use.\n\n\n\nBrymen BM235\n- True RMS, 6000 count, auto-ranging, non-contact voltage detector, temperature.\n~250\nGreat value with robust features, ideal for mid-budget users.\n\n\n\nKlein Tools MM700\n- True RMS, auto-ranging, CAT IV 600V, 1000V measurement, NCV detector.\n~180\nBest budget multimeter with essential features for engineers.\n\n\nClamp Meter\nFluke 376 FC\n- True RMS, 1000A AC/DC, CAT IV (600V), CAT III (1000V), wireless data logging via Fluke Connect.\n~900\nHigh-end, precise clamp meter for current measurement in industrial applications.\n\n\n\nUni-T UT210E\n- True RMS, 100A AC/DC, compact design, auto-ranging, NCV detection.\n~100\nBest budget clamp meter, compact, and good for everyday use.\n\n\n\nKlein Tools CL800\n- True RMS, 1000A AC/DC, CAT IV 600V, temperature, NCV detection.\n~250\nGreat mid-range option with solid features for fieldwork.\n\n\nDC Power Supply\nRigol DP832\n- Triple output (30V/3A, 30V/3A, 5V/3A), high resolution, low noise, programmable interface.\n~1,100\nHighly versatile and programmable, suitable for precise lab applications.\n\n\n\nKorad KD3005P\n- Single channel, 30V/5A, programmable, over-voltage and current protection.\n~250\nAffordable and reliable for basic DC power supply needs.\n\n\n\nTekpower TP3005T\n- 0-30V, 0-5A, analog control, over-voltage protection.\n~150\nGood for engineers on a budget who need basic DC power regulation.\n\n\nAC Power Supply\nBK Precision 9801\n- 300V AC, 10A, adjustable, programmable, dual display, remote control via USB.\n~2,200\nAdvanced, highly accurate for testing various AC-powered devices.\n\n\n\nAPPA PQR1000\n- Portable AC power quality analyzer, CAT III 600V, with current and voltage monitoring.\n~1,200\nMid-range option, great for measuring and analyzing AC power quality.\n\n\n\nAIM-TTI TGA1241\n- 240V, frequency range 10Hz-10MHz, high accuracy with waveform synthesis.\n~3,000\nHigh-performance lab-grade AC power supply with precise frequency control.\n\n\nOscilloscope\nRigol DS1054Z\n- 4 channels, 50 MHz bandwidth (upgradable), 1 GSa/s sampling rate, 12 Mpts memory.\n~550\nBest budget oscilloscope with solid performance, ideal for lab use.\n\n\n\nSiglent SDS1202X-E\n- 2 channels, 200 MHz bandwidth, 1 GSa/s sampling rate, 14 Mpts memory, waveform capture rate up to 400,000 wfm/s.\n~650\nGreat value for performance, with higher bandwidth at a reasonable price.\n\n\n\nTektronix TBS1052B\n- 2 channels, 50 MHz bandwidth, 500 MS/s, basic FFT analysis.\n~900\nReliable entry-level scope for education or general electronics work.\n\n\n\n\n\nKey Considerations\n\nMultimeters: Fluke 87V is a gold standard for accuracy and durability, but if you need a mid-budget alternative, the Brymen BM235 is great for everyday engineering use. Klein Tools MM700 is a budget-friendly, essential multimeter.\nClamp Meters: Fluke 376 FC is highly recommended for professional and industrial work due to its precision and wireless logging, while the Uni-T UT210E is a budget-friendly and compact option for basic AC/DC current measurements.\nDC Power Supply: Rigol DP832 offers superior control and versatility in lab environments, but the Korad KD3005P is an excellent budget choice with basic features for engineers.\nAC Power Supply: BK Precision 9801 is top-tier for its precision and programmability, ideal for serious testing. AIM-TTI TGA1241 is a more specialized option for waveform synthesis.\nOscilloscopes: Rigol DS1054Z is unbeatable for its price-to-performance ratio, with upgradable bandwidth and great memory depth. The Siglent SDS1202X-E is a solid choice for higher bandwidth at a reasonable price.",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#specialized-tools",
+    "href": "electrical_tools.html#specialized-tools",
+    "title": "Tools",
+    "section": "3. Specialized Tools",
+    "text": "3. Specialized Tools\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nSoldering Station\nFor soldering electronic components.\nHakko FX888D or Weller WES51\n\n\nDesoldering Pump\nRemoves solder from circuit boards.\nEngineer SS-02 Solder Sucker\n\n\nHeat Gun\nShrinks heat shrink tubing, removes paint, etc.\nWagner Heat Gun\n\n\nHot Air Rework Station\nFor soldering and desoldering surface-mount components.\nQuick 861DW\n\n\nPCB Holder\nHolds PCBs securely while soldering.\nKaisi Adjustable PCB Holder\n\n\nPrecision Tweezers\nFor handling small components and wires.\nHakko CHP Tweezers\n\n\nMagnifying Glass with Light\nFor inspecting small circuits and components.\nBrightech LightView Pro\n\n\nComponent Tester\nTests diodes, transistors, capacitors, and other components.\nAtlas DCA Pro",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#safety-tools",
+    "href": "electrical_tools.html#safety-tools",
+    "title": "Tools",
+    "section": "4. Safety Tools",
+    "text": "4. Safety Tools\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nInsulated Gloves\nProtects against electrical shocks.\nSalisbury Electriflex Gloves\n\n\nInsulated Mats\nProtects from electric shock during testing.\nSalisbury Switchboard Mat\n\n\nSafety Glasses\nProtects eyes during electrical work.\n3M Safety Glasses\n\n\nVoltage Detector (Non-Contact)\nDetects live voltage without touching wires.\nFluke 1AC II VoltAlert\n\n\nGrounding Wrist Strap\nPrevents static discharge when working with sensitive electronics.\nStarTech.com Anti-Static Wrist Strap\n\n\nArc Flash Protective Gear\nProtects against arc flash in high-voltage environments.\nOberon TCG Arc Flash Kit",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#tools-for-design-and-analysis",
+    "href": "electrical_tools.html#tools-for-design-and-analysis",
+    "title": "Tools",
+    "section": "5. Tools for Design and Analysis",
+    "text": "5. Tools for Design and Analysis\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nComputer-Aided Design (CAD) Software\nFor designing circuits and PCBs.\nAutoCAD Electrical, Altium Designer, KiCad\n\n\nCircuit Simulation Software\nSimulates electronic circuits before building.\nLTSpice, Proteus, Multisim\n\n\nPCB Design Software\nFor designing printed circuit boards (PCBs).\nEagle, KiCad, Altium\n\n\nMathematics Software\nFor engineering calculations and analysis.\nMATLAB, Wolfram Mathematica\n\n\nProject Management Software\nTo track and manage engineering projects.\nMicrosoft Project, Trello, Asana",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#construction-and-installation-tools",
+    "href": "electrical_tools.html#construction-and-installation-tools",
+    "title": "Tools",
+    "section": "6. Construction and Installation Tools",
+    "text": "6. Construction and Installation Tools\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nDrill (Cordless)\nFor installing electrical systems and drilling holes.\nDeWalt 20V MAX Cordless Drill\n\n\nDrill Bits (For Metal)\nUsed with the drill for cutting through metal surfaces.\nBosch Titanium Drill Bit Set\n\n\nMeasuring Tape\nMeasures distances for installations and layouts.\nStanley PowerLock Measuring Tape\n\n\nLevel\nEnsures equipment and installations are properly aligned.\nStanley FatMax Level\n\n\nPunch Down Tool\nFor terminating wires into patch panels and jacks.\nFluke Networks Punch Down Tool\n\n\nConduit Bender\nBends metal or PVC conduit for wiring runs.\nGardner Bender BigBen Conduit Bender",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#connectivity-and-network-tools",
+    "href": "electrical_tools.html#connectivity-and-network-tools",
+    "title": "Tools",
+    "section": "7. Connectivity and Network Tools",
+    "text": "7. Connectivity and Network Tools\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nCable Tester\nTests the integrity of cables (Ethernet, coaxial, etc.).\nFluke Networks Cable Tester\n\n\nLAN Tester\nFor testing network cables and connectivity.\nKlein Tools VDV501-825\n\n\nCrimping Tool for RJ45\nCrimps RJ45 connectors onto network cables.\nKlein Tools VDV226-110\n\n\nWire Tracer\nIdentifies specific wires in bundles.\nFluke Networks Pro3000",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#documentation-and-labeling-tools",
+    "href": "electrical_tools.html#documentation-and-labeling-tools",
+    "title": "Tools",
+    "section": "8. Documentation and Labeling Tools",
+    "text": "8. Documentation and Labeling Tools\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nLabel Maker\nLabels wires, cables, and electrical components.\nBrother P-touch PT-D600\n\n\nNotebook or Tablet\nFor keeping track of measurements, drawings, and notes.\nMoleskine Engineering Notebook or iPad\n\n\nCable Tags/Markers\nLabels and organizes wires for easy identification.\nPanduit Cable Markers",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#essential-workshop-items",
+    "href": "electrical_tools.html#essential-workshop-items",
+    "title": "Tools",
+    "section": "9. Essential Workshop Items",
+    "text": "9. Essential Workshop Items\n\n\n\n\n\n\n\n\nTool\nPurpose\nRecommendation\n\n\n\n\nWorkbench\nProvides a sturdy surface for electrical work.\nSeville Classics Workbench\n\n\nESD Mat\nAnti-static surface for working with sensitive electronics.\nStarTech.com Anti-Static Mat\n\n\nToolbox or Tool Belt\nFor organizing and carrying essential tools.\nDEWALT ToughSystem Tool Box\n\n\nHeadlamp or Work Light\nIlluminates work areas, especially in low-light conditions.\nBlack Diamond Spot Headlamp",
+    "crumbs": [
+      "Tools"
+    ]
+  },
+  {
+    "objectID": "electrical_tools.html#reference-materials",
+    "href": "electrical_tools.html#reference-materials",
+    "title": "Tools",
+    "section": "10. Reference Materials",
+    "text": "10. Reference Materials\n\n\n\n\n\n\n\n\nResource\nPurpose\nRecommendation\n\n\n\n\nElectrical Code Books\nReference for local electrical codes and standards.\nAustralian Electrical Standards\n\n\nEngineering Textbooks\nFor reference on circuit theory, design, and systems.\nThe Art of Electronics by Horowitz and Hill\n\n\nOnline Communities\nForums for troubleshooting and collaboration.\nStackExchange (Electrical Engineering), Reddit r/ElectricalEngineering",
+    "crumbs": [
+      "Tools"
+    ]
+  }
+]
