@@ -11,8 +11,8 @@ format:
   typst:
     toc: true
     section-numbering: 1.1.a
-    columns: 2
-
+  mediawiki: default
+  
 website:
   twitter-card: true
   open-graph: true
