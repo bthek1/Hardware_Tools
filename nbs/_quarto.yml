@@ -8,7 +8,6 @@ format:
     toc: true
     keep-md: true
   commonmark: default
-  pdf: default
   typst:
     toc: true
     section-numbering: 1.1.a
