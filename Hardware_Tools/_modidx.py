@@ -5,4 +5,4 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://bthek1.github.io',
                 'git_url': 'https://github.com/bthek1/Hardware_Tools',
                 'lib_path': 'Hardware_Tools'},
-  'syms': {'Hardware_Tools.core': {'Hardware_Tools.core.foo': ('core.html#foo', 'Hardware_Tools/core.py')}}}
+  'syms': {}}
