@@ -1,3 +1,30 @@
 [build-system]
-requires = ["setuptools>=64.0"]
+requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "Hardware_Tools"
+dynamic = ["version"]
+description = ""
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "Apache-2.0"}
+authors = [{name = "Benedict Thekkel", email = "bthekkel1@gmail.com"}]
+keywords = ['nbdev', 'jupyter', 'notebook', 'python']
+classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/bthek1/Hardware_Tools"
+Documentation = "https://bthek1.github.io/Hardware_Tools"
+
+[project.entry-points.nbdev]
+Hardware_Tools = "Hardware_Tools._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "Hardware_Tools.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["Hardware_Tools"]
+
+[tool.nbdev]
