@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Benedict Thekkel">
+<meta name="description" content="SCADA = Supervisory Control and Data Acquisition: the layer above the PLCs. It doesn’t close control loops — it polls distributed controllers, stores the results, draws them on screens, raises alarms, and lets an operator issue setpoints. The controllers keep running if SCADA dies; that separation is the entire architecture.">
+
+<title>SCADA – Hardware_Tools</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Industrial Automation/as_4024.html" rel="next">
+<link href="../Industrial Automation/plc.html" rel="prev">
+<link href="../favi.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-53d6c8f0b3f9c31b44cb307607e3be2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a58fa6f7ddf09bc4fafbd1d199f8d124.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-53d6c8f0b3f9c31b44cb307607e3be2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="SCADA – Hardware_Tools">
+<meta property="og:description" content="SCADA = Supervisory Control and Data Acquisition: the layer above the PLCs. It doesn’t close control loops — it polls distributed controllers, stores the results, draws them on screens, raises alarms, and lets an operator issue setpoints. The controllers keep running if SCADA dies; that separation is the entire architecture.">
+<meta property="og:image" content="https://bthek1.github.io/Hardware_Tools/Industrial Automation/Logo.svg">
+<meta property="og:site_name" content="Hardware_Tools">
+<meta name="twitter:title" content="SCADA – Hardware_Tools">
+<meta name="twitter:description" content="SCADA = Supervisory Control and Data Acquisition: the layer above the PLCs. It doesn’t close control loops — it polls distributed controllers, stores the results, draws them on screens, raises alarms, and lets an operator issue setpoints. The controllers keep running if SCADA dies; that separation is the entire architecture.">
+<meta name="twitter:image" content="https://bthek1.github.io/Hardware_Tools/Industrial Automation/Logo.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo light-content">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-deep-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-deep-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/FastAI_course/">
+ <span class="dropdown-text">Fast AI course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_methods/">
+ <span class="dropdown-text">DL Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_tasks/">
+ <span class="dropdown-text">DL Tasks</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ml-techniques" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">ML Techniques</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ml-techniques">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_methods/">
+ <span class="dropdown-text">ML Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/TimeSeriesML/">
+ <span class="dropdown-text">Time series</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Web</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-web">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/WEB_doc/">
+ <span class="dropdown-text">Web Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Front_End/">
+ <span class="dropdown-text">Front End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Back_End/">
+ <span class="dropdown-text">Back End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/IaaS_docs/">
+ <span class="dropdown-text">IaaS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Software_Tools/">
+ <span class="dropdown-text">Software Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Hardware_Tools/">
+ <span class="dropdown-text">Hardware Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Python_Libs/">
+ <span class="dropdown-text">Python Libraries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/nbdevAuto/">
+ <span class="dropdown-text">Nbdev Automation</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-business" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Business</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-business">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Business_doc/">
+ <span class="dropdown-text">Business Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Philosophy_doc/">
+ <span class="dropdown-text">Ideas Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Finances/">
+ <span class="dropdown-text">Finances</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Other/">
+ <span class="dropdown-text">Other</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Bug</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-chat-right-text" role="img">
+</i> 
+ <span class="dropdown-text">Ask a Question</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-question-circle" role="img">
+</i> 
+ <span class="dropdown-text">FAQ</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/bthek1" title="" class="quarto-navigation-tool px-1" aria-label="Github"><i class="bi bi-github"></i></a>
+    <a href="https://www.linkedin.com/in/benedict-thekkel/" title="" class="quarto-navigation-tool px-1" aria-label="Linkedin"><i class="bi bi-linkedin"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Industrial Automation/plc.html">Industrial Automation</a></li><li class="breadcrumb-item"><a href="../Industrial Automation/scada.html">SCADA</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hardware Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../electrical_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Eletrical Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../computer_build.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Computer Build</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rgb_lighting_build.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RGB Lighting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../drone_build.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Drone Build</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../home_assistant.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home Assistant</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../camera.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Camera</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../electrical_switch_components.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrical Switch Components</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Eletrical Motors</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Eletrical_Motors/electric_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electric Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Eletrical_Motors/servos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Servo Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Eletrical_Motors/stepper_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stepper Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Eletrical_Motors/brushless_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Brushless Motors (BLDC / PMSM)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Embedded Systems</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/microcontrollers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microcontroller dev board comparison</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/raspberry_pi_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Raspberry PI Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/0_pico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/1_pico_c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pico with C/C++</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/iotawatt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IotaWatt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/0_esc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ESC (Electronic Speed Controller)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/1_esc_firmware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ESC Firmware</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Embedded_Systems/cellular_iot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cellular IoT</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Industrial Automation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Industrial Automation/plc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PLC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Industrial Automation/scada.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">SCADA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Industrial Automation/as_4024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AS 4024</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link active" data-scroll-target="#architecture">Architecture</a></li>
+  <li><a href="#the-tag-model" id="toc-the-tag-model" class="nav-link" data-scroll-target="#the-tag-model">The tag model</a></li>
+  <li><a href="#polling-vs-report-by-exception" id="toc-polling-vs-report-by-exception" class="nav-link" data-scroll-target="#polling-vs-report-by-exception">Polling vs report-by-exception</a></li>
+  <li><a href="#protocols" id="toc-protocols" class="nav-link" data-scroll-target="#protocols">Protocols</a></li>
+  <li><a href="#hmi-design-the-part-everyone-does-badly" id="toc-hmi-design-the-part-everyone-does-badly" class="nav-link" data-scroll-target="#hmi-design-the-part-everyone-does-badly">HMI design — the part everyone does badly</a></li>
+  <li><a href="#historian" id="toc-historian" class="nav-link" data-scroll-target="#historian">Historian</a></li>
+  <li><a href="#redundancy-and-availability" id="toc-redundancy-and-availability" class="nav-link" data-scroll-target="#redundancy-and-availability">Redundancy and availability</a></li>
+  <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a></li>
+  <li><a href="#scada-vs-dcs-vs-mes" id="toc-scada-vs-dcs-vs-mes" class="nav-link" data-scroll-target="#scada-vs-dcs-vs-mes">SCADA vs DCS vs MES</a></li>
+  <li><a href="#vendors" id="toc-vendors" class="nav-link" data-scroll-target="#vendors">Vendors</a></li>
+  <li><a href="#building-one-yourself-read-this-before-you-start" id="toc-building-one-yourself-read-this-before-you-start" class="nav-link" data-scroll-target="#building-one-yourself-read-this-before-you-start">Building one yourself — read this before you start</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/bthek1/Hardware_Tools/blob/main/Industrial Automation/02_SCADA.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Industrial Automation/plc.html">Industrial Automation</a></li><li class="breadcrumb-item"><a href="../Industrial Automation/scada.html">SCADA</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">SCADA</h1>
+</div>
+
+<div>
+  <div class="description">
+    <strong>SCADA = Supervisory Control and Data Acquisition</strong>: the layer above the PLCs. It doesn’t close control loops — it polls distributed controllers, stores the results, draws them on screens, raises alarms, and lets an operator issue setpoints. The controllers keep running if SCADA dies; that separation is the entire architecture.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Benedict Thekkel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="architecture" class="level2">
+<h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
+<pre><code>Field devices ── sensors, valves, breakers, VFDs, meters
+     │  4-20 mA / discrete / IO-Link
+PLC / RTU / IED ── local control, keeps running standalone
+     │  Modbus / DNP3 / IEC 60870-5-104 / IEC 61850 / EtherNet-IP
+Front-end / Gateway / OPC UA server ── protocol translation, tag namespace
+     │
+SCADA server(s) ── tag engine, alarm engine, scripting, redundancy pair
+     ├── Historian (time-series DB)
+     ├── HMI / operator clients (thick, thin, web, mobile)
+     └── Northbound: MES, ERP, reporting, cloud</code></pre>
+<p><strong>RTU vs PLC</strong>: an RTU is a controller optimized for remote telemetry — low power (solar/battery), wide temperature, built-in cellular/radio modem, store-and-forward buffering, timestamping at source, and event-driven reporting. A PLC is optimized for fast deterministic control. Modern devices blur the line; SCADAPack, Bristol, Kingfisher sit on the RTU side.</p>
+<p><strong>IED</strong> (Intelligent Electronic Device) is the substation term: protection relays, meters, tap changers — devices with their own protection logic that SCADA merely observes and occasionally commands.</p>
+</section>
+<section id="the-tag-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-tag-model">The tag model</h2>
+<p>The core abstraction is a <strong>tag</strong>: named, typed, timestamped, quality-flagged value.</p>
+<pre><code>Plant/Area2/Pump101/Status      Bool   true   Good   2026-08-11T04:22:31.442Z
+Plant/Area2/Pump101/Amps        Float  14.7   Good   ...
+Plant/Area2/Pump101/RunHours    Float  8821.3 Good   ...</code></pre>
+<p>Three things distinguish this from <code>SELECT value FROM sensors</code>:</p>
+<ol type="1">
+<li><strong>Quality</strong> is first-class. <code>Good / Bad_CommFailure / Uncertain_LastKnownValue / Bad_ConfigError</code>. A stale value that looks fine is how people get hurt. Never render a Bad-quality tag as a number without visual indication.</li>
+<li><strong>Timestamp source</strong> matters. Timestamped at the RTU (accurate, needs NTP/GPS sync at every site) vs at the SCADA server on receipt (easy, wrong by the transport latency). Sequence-of-events analysis after a grid trip needs 1 ms source timestamps.</li>
+<li><strong>UDTs / templates.</strong> You define <code>PumpType</code> once with its members, instantiate it 200 times, and build one screen template bound to an indirect tag path. If you’re hand-writing 200 near-identical screens you’ve already lost.</li>
+</ol>
+</section>
+<section id="polling-vs-report-by-exception" class="level2">
+<h2 class="anchored" data-anchor-id="polling-vs-report-by-exception">Polling vs report-by-exception</h2>
+<ul>
+<li><strong>Polling</strong>: server asks every device for every register on a cycle. Simple, predictable load, wasteful. Fine on a LAN.</li>
+<li><strong>Report-by-exception (RBE) / unsolicited reporting</strong>: device pushes only on change beyond deadband, or on event. Essential over metered cellular links. DNP3 and IEC 60870-5-104 are built around this; Modbus is not.</li>
+<li><strong>Deadband</strong> (analog change threshold) and <strong>scan class</strong> (fast/slow/on-demand groups) are the two knobs you tune to keep a link inside budget.</li>
+</ul>
+</section>
+<section id="protocols" class="level2">
+<h2 class="anchored" data-anchor-id="protocols">Protocols</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Protocol</th>
+<th>Domain</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Modbus RTU/TCP</strong></td>
+<td>universal</td>
+<td>Registers only — no types, no timestamps, no quality, no security. Big-endian word order is <em>not</em> consistently implemented; expect to byte-swap floats. Still the default because everything speaks it.</td>
+</tr>
+<tr class="even">
+<td><strong>DNP3</strong></td>
+<td>North American utilities, water</td>
+<td>Real data model: static + event data, source timestamps, unsolicited reporting, class 0/1/2/3 polling, time sync. Secure Authentication v5 exists and is rarely enabled.</td>
+</tr>
+<tr class="odd">
+<td><strong>IEC 60870-5-101/-104</strong></td>
+<td>European/Asian utilities</td>
+<td>Equivalent role to DNP3. -101 is serial, -104 is TCP.</td>
+</tr>
+<tr class="even">
+<td><strong>IEC 61850</strong></td>
+<td>substation automation</td>
+<td>Object-oriented model (Logical Nodes), SCL config files, MMS for client/server, <strong>GOOSE</strong> multicast for sub-4 ms peer-to-peer trip signals, Sampled Values for digitized CT/VT. Complex and genuinely well-designed.</td>
+</tr>
+<tr class="odd">
+<td><strong>OPC UA</strong></td>
+<td>everything modern</td>
+<td>Platform-independent, typed information model, browsable namespace, built-in TLS + certificates + user auth, pub/sub since 1.04. This is the correct northbound interface.</td>
+</tr>
+<tr class="even">
+<td><strong>OPC DA/Classic</strong></td>
+<td>legacy</td>
+<td>DCOM-based. Windows-only, firewall-hostile, dying. Use a UA wrapper.</td>
+</tr>
+<tr class="odd">
+<td><strong>MQTT + Sparkplug B</strong></td>
+<td>IIoT</td>
+<td>Push, broker-based, tiny payloads, birth/death certificates give you state awareness. Excellent over cellular and NAT. The modern telemetry answer.</td>
+</tr>
+<tr class="even">
+<td><strong>BACnet / KNX / M-Bus</strong></td>
+<td>building automation, metering</td>
+<td>Adjacent world, occasionally integrated.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hmi-design-the-part-everyone-does-badly" class="level2">
+<h2 class="anchored" data-anchor-id="hmi-design-the-part-everyone-does-badly">HMI design — the part everyone does badly</h2>
+<p>The 1990s aesthetic (photorealistic tanks, rainbow pipes, animated bitmaps) actively harms operators. The current standard is <strong>high-performance HMI</strong> (ISA-101):</p>
+<ul>
+<li>Grey scale background and equipment. Colour reserved <em>exclusively</em> for abnormal conditions.</li>
+<li>Analog values shown with context — trend sparkline, normal-range band — not bare digits.</li>
+<li>Layered navigation: Level 1 plant overview → Level 2 unit → Level 3 detail → Level 4 diagnostics.</li>
+<li>Consistent symbol library and colour semantics across every screen in the plant.</li>
+</ul>
+<p><strong>Alarm management (ISA 18.2 / EEMUA 191)</strong> is a discipline in itself. Targets: <strong>≤ 6 alarms/hour steady state, ≤ 150 in the 10 minutes after an upset.</strong> Real plants routinely run at 10× that, operators learn to ignore the banner, and then Texas City happens. Practices that matter: every alarm must have a defined operator response, priority distribution roughly 80/15/5 low/med/high, deadband and on-delay to kill chatter, first-out / cause-effect suppression, shelving with expiry, and rationalization documentation. Alarm floods are a design failure, not an operator failure.</p>
+</section>
+<section id="historian" class="level2">
+<h2 class="anchored" data-anchor-id="historian">Historian</h2>
+<p>Time-series storage optimized for one write pattern and one read pattern.</p>
+<ul>
+<li><strong>Swinging-door / dead-band compression</strong> — stores a value only when a new sample would fall outside a tolerance corridor of the interpolated line. 10–100× reduction with bounded error. Understand it before you trust a reconstructed trend.</li>
+<li>Query semantics you need: raw, interpolated-at-interval, aggregates (min/max/avg/stddev/time-weighted-avg), and <em>time-weighted</em> is the correct default for process values.</li>
+<li>Products: OSIsoft/AVEVA PI (the incumbent, expensive, ubiquitous in oil &amp; gas and utilities), Canary, InfluxDB, TimescaleDB, ClickHouse. Ignition’s built-in historian writes to Postgres/MSSQL and is perfectly adequate for most plants.</li>
+<li>Retention tiering: 1 s raw for 90 days → 1 min rollup for 2 years → 15 min forever, is a typical shape.</li>
+</ul>
+</section>
+<section id="redundancy-and-availability" class="level2">
+<h2 class="anchored" data-anchor-id="redundancy-and-availability">Redundancy and availability</h2>
+<ul>
+<li><strong>Hot standby SCADA pair</strong> with synchronized tag state and automatic failover; clients reconnect transparently.</li>
+<li><strong>Redundant comms paths</strong> — primary fibre, backup cellular, with automatic failover per-device.</li>
+<li><strong>Store-and-forward</strong> at the edge: RTU buffers timestamped data during a link outage and backfills the historian on reconnect. Without this, every comms blip is a hole in your data forever.</li>
+<li>Control authority always degrades <em>downward</em>: PLC keeps running its last valid setpoints when SCADA is gone. Design so an unreachable SCADA is boring.</li>
+</ul>
+</section>
+<section id="security" class="level2">
+<h2 class="anchored" data-anchor-id="security">Security</h2>
+<p>SCADA is the layer with the internet-facing risk, so this is not optional.</p>
+<ul>
+<li><strong>Purdue model / ISA-95 levels 0–5</strong>, with an <strong>industrial DMZ</strong> between level 3 (site operations) and level 4 (enterprise IT). Data flows out through the DMZ; nothing initiates inbound to control.</li>
+<li><strong>IEC 62443</strong> is the governing standard family — zones, conduits, security levels SL1–SL4.</li>
+<li>Legacy protocols have <strong>no authentication whatsoever</strong>. Anyone with L2 access can issue a breaker-open command over unsecured DNP3. Security is topological, not cryptographic, on the field side.</li>
+<li>Precedent: <strong>Stuxnet</strong> (2010, centrifuge damage via PLC firmware manipulation), <strong>Ukraine 2015/2016</strong> (grid outages via stolen HMI credentials, then a purpose-built IEC-104 tool), <strong>Colonial Pipeline 2021</strong> (IT ransomware, but OT shut down precautionarily — which is the common real-world pattern), <strong>Oldsmar</strong> (remote-access software on an HMI). Nearly all start with remote access and flat networks, not exotic zero-days.</li>
+<li>Practical baseline: unidirectional gateway or firewalled DMZ, no vendor remote access without jump host + MFA, disable unused protocol servers, signed firmware, patching windows negotiated a year ahead because you cannot reboot a running plant.</li>
+</ul>
+</section>
+<section id="scada-vs-dcs-vs-mes" class="level2">
+<h2 class="anchored" data-anchor-id="scada-vs-dcs-vs-mes">SCADA vs DCS vs MES</h2>
+<ul>
+<li><strong>DCS</strong> (Emerson DeltaV, Honeywell Experion, ABB 800xA, Siemens PCS 7): single-vendor, tightly integrated, engineered as one database from field device to screen. Suits continuous processes — refineries, chemicals, power stations. Higher cost, higher integrity, less flexibility.</li>
+<li><strong>SCADA</strong>: multi-vendor, loosely coupled, supervisory over independent controllers. Suits discrete and distributed applications.</li>
+<li><strong>MES</strong>: production orders, batch genealogy, OEE, quality — level 3, sits above SCADA, business-facing.</li>
+</ul>
+<p>The distinction has eroded; modern SCADA + PLCs does most of what a small DCS does, at a fraction of the price.</p>
+</section>
+<section id="vendors" class="level2">
+<h2 class="anchored" data-anchor-id="vendors">Vendors</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Product</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ignition</strong> (Inductive Automation)</td>
+<td>The one to learn. Java-based, unlimited-tag server licensing, Jython 2.7 scripting, web-deployed Perspective clients, native MQTT/Sparkplug, Postgres/MSSQL backend. The only one that behaves like a normal software platform.</td>
+</tr>
+<tr class="even">
+<td><strong>AVEVA System Platform / InTouch</strong> (ex-Wonderware)</td>
+<td>Huge installed base, object-oriented (ArchestrA), heavy licensing.</td>
+</tr>
+<tr class="odd">
+<td><strong>Siemens WinCC / WinCC OA</strong></td>
+<td>WinCC for TIA-integrated plant HMI; WinCC OA (ex-ETM PVSS) for very large distributed systems — CERN runs on it.</td>
+</tr>
+<tr class="even">
+<td><strong>Rockwell FactoryTalk View SE</strong></td>
+<td>Tight AB integration, Windows-centric, painful outside the ecosystem.</td>
+</tr>
+<tr class="odd">
+<td><strong>GE/Emerson iFIX &amp; CIMPLICITY</strong></td>
+<td>Long-lived, common in water and utilities.</td>
+</tr>
+<tr class="even">
+<td><strong>COPA-DATA zenon</strong></td>
+<td>Strong in energy and pharma, good IEC 61850 support.</td>
+</tr>
+<tr class="odd">
+<td><strong>Open source</strong>: Rapid SCADA, ScadaBR/Mango, OpenPLC + Node-RED + Grafana</td>
+<td>Fine for learning and low-consequence monitoring. Not for anything with a safety or regulatory dimension.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="building-one-yourself-read-this-before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="building-one-yourself-read-this-before-you-start">Building one yourself — read this before you start</h2>
+<p>Your stack (Django + DRF + React + Postgres + Redis) maps deceptively well: Postgres/TimescaleDB as historian, Redis as the live tag cache, Channels/WebSockets for push to a React dashboard, <code>pymodbus</code> or <code>asyncua</code> for the driver layer, Celery for scheduled polls. You could have a working prototype in a fortnight.</p>
+<p>What you’d be re-implementing badly, in rough order of pain: quality propagation, store-and-forward with historical backfill, alarm state machines (unacked-active / acked-active / unacked-cleared, plus shelving and suppression), redundancy and failover, tag templating with indirect binding, per-device driver quirks, sub-second update fan-out to 30 clients, and audit trails for operator commands (21 CFR Part 11 if pharma, and utilities have their own).</p>
+<p>Reasonable split: <strong>build it yourself for monitoring and analytics; buy Ignition the moment an operator can issue a command that moves something.</strong> The liability line is the write path, not the read path. If you do go custom, use OPC UA (<code>asyncua</code>) as your southbound interface rather than raw Modbus — you get types, browsing, subscriptions, and TLS for free, and any vendor gateway will expose one.</p>
+<p>Given your CV/ML interest, the genuinely interesting layer is above SCADA: historian data → feature pipeline → anomaly detection and soft sensors, fed back as advisory-only tags. That’s where the value is and where nobody’s liability is on the line.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bthek1\.github\.io\/Hardware_Tools");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<script src="https://utteranc.es/client.js" repo="quarto-dev/quarto-web" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Industrial Automation/plc.html" class="pagination-link" aria-label="PLC">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">PLC</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Industrial Automation/as_4024.html" class="pagination-link" aria-label="AS 4024">
+        <span class="nav-page-text">AS 4024</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page">
+<p>Trademark</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/bthek1/bthek1_blog/issues">
+<p>FAQ</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/index.html">
+<p>License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+<p>Trademark</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/bthek1/Hardware_Tools/blob/main/Industrial Automation/02_SCADA.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Hardware_Tools/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bthek1">
+      <i class="bi bi-github" role="img" aria-label="Github">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/benedict-thekkel/">
+      <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
