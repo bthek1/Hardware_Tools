@@ -28,3 +28,4 @@ version = {attr = "Hardware_Tools.__version__"}
 include = ["Hardware_Tools"]
 
 [tool.nbdev]
+custom_sidebar = true
